@@ -2,24 +2,27 @@
 #include<string>
 #include<algorithm>
 #include<list>
-#include <cstdlib>
+#include<vector>
+#include<array>
+#include<cstdlib>
 
 using namespace std;
 
 char sentence[40];
 list<string> words;
-list<int> spacecnts;
+vector<int> spacecnts;
+array<int, 26> alphacnts{};
 bool isrunning;
 
 // 명령어 룰
-// 1. a~z를 입력하면 대소문자를 바꾼다.
-// 2. 1을 입력하면 공백을 줄인다.
-// 3. 2를 입력하면 공백을 늘린다.
-// 4. 3을 입력하면 알파벳 오름차순 정렬 + 개수까지 ex) a3b2c3d4e10...
-// 5. 4를 입력하면 단어 길이 기준 정렬 + 개수 단어 사이의 공백은 한 칸
-// 6. . 을 문장 마지막에 적는다.
+//  a~z를 입력하면 대소문자를 바꾼다.
+//  1을 입력하면 공백을 줄인다.
+//  2를 입력하면 공백을 늘린다.
+//  3을 입력하면 알파벳 오름차순 정렬 + 개수까지 ex) a3b2c3d4e10...
+//  4를 입력하면 단어 길이 기준 정렬 + 개수 단어 사이의 공백은 한 칸
+//  . 을 문장 마지막에 적는다.
 
-void makewords(const char*);
+void makewords(char*);
 
 
 //----------------
@@ -29,6 +32,103 @@ int main()
 	isrunning = true;
 	cout << "문장을 입력하시오 : ";
 	cin.getline(sentence, 40);
+
+	makewords(sentence);
+
+	isrunning = true;
+	string order{};
+
+	bool isorder4 = false;
+
+	while (isrunning) {
+		system("cls");
+		isorder4 = false;
+		cout << "명령어를 입력하시오 : ";
+		cin >> order;
+		cout << endl << endl;
+
+		cout << "변경 전 문장 : ";
+		auto ib = words.begin();
+		for (int i = 0; i < words.size(); ++i, ++ib) {
+			cout << *ib;
+			if (i < spacecnts.size()) {
+				for (int j = 0; j < spacecnts[i]; ++j)
+					cout << ' ';
+			}
+		}
+		cout << "." << endl << endl;
+
+		if (*order.data() >= 'a' && *order.data() <= 'z') {
+			// 대소문자 바꾸기
+			for (auto& word : words) {
+				for (auto& c : word) {
+					if (c == *order.data())
+						c = char(toupper(c));
+					else if(char(tolower(c)) == *order.data())
+						c = char(tolower(c));
+				}
+			}
+		}
+		else if (*order.data() == '1') {
+			// 공백 줄이기
+			for (auto& i : spacecnts)
+				if (i > 0)
+					--i;
+		}
+		else if (*order.data() == '2') {
+			// 공백 늘이기
+			for (auto& i : spacecnts)
+				if (i < 5)
+					++i;
+		}
+		else if (*order.data() == '3') {
+			//오름차순 정렬
+			cout << "오름차순 정렬 : ";
+			for (int i = 0; i < 26; ++i) {
+				if (alphacnts[i] != 0)
+					cout << char(i + 'a') << alphacnts[i];
+			}
+			cout << endl << endl;
+		}
+		else if (*order.data() == '4') {
+			//단어길이별 정렬
+			isorder4 = true;
+			list<string> temp{ words.begin(),words.end() };
+			words.sort([](const string& a, const string& b) {
+				return a.size() < b.size();
+				}
+			);
+			cout << "변경 후 문장 : ";
+			ib = words.begin();
+			for (int i = 0; i < words.size(); ++i, ++ib) {
+				cout << *ib;
+				if (i != words.size() - 1)
+					cout << ' ';
+			}
+			cout << "." << endl << endl << endl << endl << endl;
+		}
+		else if (*order.data() == '0') {
+			isrunning = false;
+		}
+		else {
+			cout << "명령어를 다시 입력하세요";
+			system("pause");
+		}
+		if(!isorder4)
+		{
+			cout << "변경 후 문장 : ";
+			ib = words.begin();
+			for (int i = 0; i < words.size(); ++i, ++ib) {
+				cout << *ib;
+				if (i < spacecnts.size()) {
+					for (int j = 0; j < spacecnts[i]; ++j)
+						cout << ' ';
+				}
+			}
+			cout << "." << endl << endl << endl << endl << endl;
+		}
+		system("pause");
+	}
 
 }
 
@@ -42,19 +142,40 @@ void makewords(char* sen)
 	int cnt = 0;		// 문장의 처음에 공백이 있다면 그것은 무효로 간주한다.
 	string word{};		// 
 	int spacecnt = 0;
-	char c{};			// 마지막이 글자였는지 빈칸이었는지 확인하기 위해.
+	char c{};			// 마지막이 글자였는지 빈칸이었는지 확인하기 위해. 
+						// 글자였다가 빈칸이면 지금까지 기록된 word를 words에 추가
+						// 빈칸이었다가 글자면 spacecnt를 spacecnts에 저장
 
 	for (int i = 0; i < 39; ++i, ++sen) {
-		if (*sen == '.')
-			return;
+		if (*sen == '.' || *sen == '\0')
+			break;
 		else if (*sen == ' ' && cnt > 0) {
-				++spacecnt;
-				++cnt;
+			if (c != ' ') {
+				words.push_back(word);
+				word = "";
 			}
-		else {
-			word += *sen;
-			
+			++spacecnt;
+			c = ' ';
 		}
-			
+		else if(*sen != ' ') {
+			if (c == ' ') {
+				spacecnts.push_back(spacecnt);
+				spacecnt = 0;
+			}
+			word += *sen;
+			c = *sen;
+			++cnt;
+		}
+	}
+
+	if (!word.empty()) {
+		words.push_back(word);
+	}
+
+	
+	for (const auto& word : words) {
+		for (const auto& c : word) {
+			++alphacnts[tolower(c) - 'a'];
+		}
 	}
 }
