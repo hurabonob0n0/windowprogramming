@@ -33,6 +33,11 @@ int main()
 	cout << "문장을 입력하시오 : ";
 	cin.getline(sentence, 40);
 
+	if (cin.fail()) {            // 40자를 초과해서 입력받아 에러가 발생했다면
+		cin.clear();             // 1. 에러 플래그 초기화 (삐진 cin을 달래줌)
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 2. 버퍼에 남은 찌꺼기 싹 비우기
+	}
+
 	makewords(sentence);
 
 	isrunning = true;
@@ -76,10 +81,39 @@ int main()
 					--i;
 		}
 		else if (*order.data() == '2') {
-			// 공백 늘이기
+			// 1. 먼저 공백을 늘립니다.
 			for (auto& i : spacecnts)
 				if (i < 5)
 					++i;
+
+			// 2. 전체 길이를 체크하며 40자가 넘으면 뒤에서부터 한 글자씩 삭제합니다.
+			while (true) {
+				int totalLen = 0;
+				auto it = words.begin();
+				// 현재 문장의 총 길이 계산 (단어 길이 + 공백 길이)
+				for (int i = 0; i < words.size(); ++i, ++it) {
+					totalLen += (int)it->size();
+					if (i < spacecnts.size()) {
+						totalLen += spacecnts[i];
+					}
+				}
+
+				// 40자 이하이거나 더 이상 지울 단어가 없으면 종료
+				if (totalLen <= 40 || words.empty()) break;
+
+				// 맨 뒤의 단어에서 한 글자 제거
+				if (!words.back().empty()) {
+					words.back().pop_back();
+				}
+
+				// 만약 단어가 한 글자도 남지 않게 되었다면 단어와 그 앞의 공백 데이터를 제거
+				if (words.back().empty()) {
+					words.pop_back();
+					if (!spacecnts.empty()) {
+						spacecnts.pop_back();
+					}
+				}
+			}
 		}
 		else if (*order.data() == '3') {
 			//오름차순 정렬
