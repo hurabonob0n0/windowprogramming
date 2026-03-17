@@ -13,43 +13,16 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="문햎프">
-      <UniqueIdentifier>{2021faaa-a04a-463b-b5fc-d9407c5ad12e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="워밍업1.cpp">
+    <ClCompile Include="window1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1_1_v2.cpp">
+    <ClCompile Include="window2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1_3.cpp">
+    <ClCompile Include="window3.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="4.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="4_v2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="문해프1-6.cpp">
-      <Filter>문햎프</Filter>
-    </ClCompile>
-    <ClCompile Include="1-5.cpp">
-      <Filter>문햎프</Filter>
-    </ClCompile>
-    <ClCompile Include="1-4.cpp">
-      <Filter>문햎프</Filter>
-    </ClCompile>
-    <ClCompile Include="1-3.cpp">
-      <Filter>문햎프</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

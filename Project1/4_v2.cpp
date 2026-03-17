@@ -80,6 +80,8 @@ void movePlayer(int& r, int& c, int dr, int dc, char symbol, int& score, bool& c
 	int nc = (c + dc + SIZE) % SIZE;
 
 	if (board[nr][nc] == ' ') return;
+	if (board[nr][nc] == '#' || board[nr][nc] == '@')
+		return;
 
 
 	if (currentWillBeObstacle) {
