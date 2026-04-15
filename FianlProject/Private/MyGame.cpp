@@ -6,6 +6,8 @@ WinInfo g_WinInfo = { nullptr, 800, 600 };
 MyGame::MyGame() {}
 MyGame::~MyGame() {}
 
+float Rot = 0.f;
+
 bool MyGame::Initialize() {
     // 1. 콘솔에서 크기 입력받기
     std::cout << "--- Window Setup ---" << std::endl;
@@ -27,13 +29,14 @@ bool MyGame::Initialize() {
     ShowWindow(g_WinInfo.hWnd, SW_SHOW);
     UpdateWindow(g_WinInfo.hWnd);
 
-    m_Shape = Tri::Create()->
-        Set_CenterPoint({ 0.5,0.5 })->
-        Set_Rot(90)->
-        Set_Width_Height(0.5f, 1.f)->
-        Set_Fill(RGB(255,0,0))->
-        Set_Line(RGB(0,0,0))->
-        Make_Points();
+    m_Shape = Circle::Create()
+        ->Set_PieAngle(270.0f)           // 270도만 그리기 (원의 3/4)
+        ->Set_CenterPoint({ 0.5f, 0.5f })
+        ->Set_Width_Height(0.4f, 0.4f)
+        ->Set_Line(RGB(0, 0, 0), 2)
+        ->Set_Fill(RGB(255, 255, 0))     // 노란색 팩맨!
+        ->Set_Rot(45.0f)                 // 45도 회전시켜서 입 방향 조절
+        ->Make_Points();
 
     return true;
 }
@@ -65,6 +68,8 @@ void MyGame::Create_MyWindow(HINSTANCE hInstance) {
 
 void MyGame::Update() {
     // 게임 로직 (예: 이동)
+    Rot += 0.01f;
+    m_Shape->Set_Rot(Rot)->Make_Points();
 }
 
 void MyGame::Late_Update() {

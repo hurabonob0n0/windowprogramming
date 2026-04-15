@@ -63,25 +63,130 @@ void Shape::Draw(HDC hDC)
 
 Shape* Tri::Make_Points()
 {
-	float fRadiusX = m_Width * 0.5f;
-	float fRadiusY = m_Height * 0.5f;
+	// 1. 기준 척도를 화면의 가로 길이(WinCX) 하나로 통일합니다.
+	// 이렇게 하면 m_Width와 m_Height가 같을 때 완벽한 정삼각형 형태를 유지합니다.
+	float fBaseScale = static_cast<float>(g_WinInfo.WinCX);
 
-	// 2. 3등분 각도 (360도 / 3 = 120도씩)
-	// 90도(위쪽)부터 시작하려면 시작 각도를 90도로 잡습니다.
-	float fStartAngle = 210.f + m_Rot;
+	float fPixelRadiusX = (m_Width * 0.5f) * fBaseScale;
+	float fPixelRadiusY = (m_Height * 0.5f) * fBaseScale; // WinCY 대신 fBaseScale 사용
+
+	// 2. 중심점은 여전히 화면상의 비율 위치(0.0~1.0)에 있어야 하므로 각각의 크기를 곱합니다.
+	float fCenterPX = m_CenterPoint.fX * g_WinInfo.WinCX;
+	float fCenterPY = (1.0f - m_CenterPoint.fY) * g_WinInfo.WinCY;
+
+	// 3. 회전량 라디안 변환
+	float fRotRad = m_Rot * (M_PI / 180.0f);
+	float fCosRot = cosf(fRotRad);
+	float fSinRot = sinf(fRotRad);
+
+	float fBaseAngles[3] = { 90.0f, 210.0f, 330.0f };
 
 	for (int i = 0; i < 3; ++i)
 	{
-		// 각도를 라디안으로 변환
-		float fRadian = (fStartAngle + (i * 120.0f)) * (M_PI / 180.0f);
+		// 4. 로컬 픽셀 좌표 계산
+		float fLocalRad = fBaseAngles[i] * (M_PI / 180.0f);
+		float fLocalPX = fPixelRadiusX * cosf(fLocalRad);
+		float fLocalPY = fPixelRadiusY * sinf(fLocalRad);
 
-		// 타원 방정식으로 비율 좌표(0.0 ~ 1.0) 계산
-		float fRatioX = m_CenterPoint.fX + fRadiusX * cosf(fRadian);
-		float fRatioY = m_CenterPoint.fY + fRadiusY * sinf(fRadian);
+		// 5. 회전 행렬 적용 (모양 보존)
+		float fRotatedPX = fLocalPX * fCosRot - fLocalPY * fSinRot;
+		float fRotatedPY = fLocalPX * fSinRot + fLocalPY * fCosRot;
 
-		m_Points[i].x = RatioToX(fRatioX, g_WinInfo.WinCX);
-		m_Points[i].y = RatioToY(fRatioY, g_WinInfo.WinCY);
+		// 6. 최종 픽셀 위치 결정
+		m_Points[i].x = static_cast<long>(fCenterPX + fRotatedPX);
+		m_Points[i].y = static_cast<long>(fCenterPY - fRotatedPY);
 	}
 
+	return this;
+}
+
+Shape* Quad::Make_Points() {
+	float fBaseScale = static_cast<float>(g_WinInfo.WinCX); //
+	float fRadiusX = (m_Width * 0.5f) * fBaseScale;
+	float fRadiusY = (m_Height * 0.5f) * fBaseScale;
+
+	float fCenterPX = m_CenterPoint.fX * g_WinInfo.WinCX; //
+	float fCenterPY = (1.0f - m_CenterPoint.fY) * g_WinInfo.WinCY; //
+
+	float fRotRad = m_Rot * (M_PI / 180.0f);
+	float fCosRot = cosf(fRotRad), fSinRot = sinf(fRotRad);
+
+	// 사각형은 45도부터 시작하여 90도씩 증가
+	for (int i = 0; i < 4; ++i) {
+		float fLocalRad = (45.0f + (i * 90.0f)) * (M_PI / 180.0f);
+		float fLocalPX = fRadiusX * cosf(fLocalRad);
+		float fLocalPY = fRadiusY * sinf(fLocalRad);
+
+		float fRotatedPX = fLocalPX * fCosRot - fLocalPY * fSinRot;
+		float fRotatedPY = fLocalPX * fSinRot + fLocalPY * fCosRot;
+
+		m_Points[i].x = static_cast<long>(fCenterPX + fRotatedPX);
+		m_Points[i].y = static_cast<long>(fCenterPY - fRotatedPY);
+	}
+	return this;
+}
+
+Shape* Pentagon::Make_Points() {
+	float fBaseScale = static_cast<float>(g_WinInfo.WinCX);
+	float fRadiusX = (m_Width * 0.5f) * fBaseScale;
+	float fRadiusY = (m_Height * 0.5f) * fBaseScale;
+	float fCenterPX = m_CenterPoint.fX * g_WinInfo.WinCX;
+	float fCenterPY = (1.0f - m_CenterPoint.fY) * g_WinInfo.WinCY;
+
+	float fRotRad = m_Rot * (M_PI / 180.0f);
+	float fCosRot = cosf(fRotRad), fSinRot = sinf(fRotRad);
+
+	// 오각형은 72도씩 증가
+	for (int i = 0; i < 5; ++i) {
+		float fLocalRad = (90.0f + (i * 72.0f)) * (M_PI / 180.0f);
+		float fLocalPX = fRadiusX * cosf(fLocalRad);
+		float fLocalPY = fRadiusY * sinf(fLocalRad);
+
+		float fRotatedPX = fLocalPX * fCosRot - fLocalPY * fSinRot;
+		float fRotatedPY = fLocalPX * fSinRot + fLocalPY * fCosRot;
+
+		m_Points[i].x = static_cast<long>(fCenterPX + fRotatedPX);
+		m_Points[i].y = static_cast<long>(fCenterPY - fRotatedPY);
+	}
+	return this;
+}
+
+Shape* Circle::Make_Points() {
+	float fBaseScale = static_cast<float>(g_WinInfo.WinCX);
+	float fRadiusX = (m_Width * 0.5f) * fBaseScale;
+	float fRadiusY = (m_Height * 0.5f) * fBaseScale;
+	float fCenterPX = m_CenterPoint.fX * g_WinInfo.WinCX;
+	float fCenterPY = (1.0f - m_CenterPoint.fY) * g_WinInfo.WinCY;
+
+	float fRotRad = m_Rot * (M_PI / 180.0f);
+	float fCosRot = cosf(fRotRad), fSinRot = sinf(fRotRad);
+
+	// 파이 모양일 경우 중심점을 포함하기 위해 점 개수 조절
+	bool isPie = (m_PieAngle < 360.0f);
+	int pointCount = 64; // SHAPE::CIRCLE의 기본 크기
+
+	// m_Points 크기 재조정 (파이 형태면 중심점 + 1)
+	m_Points.assign(isPie ? pointCount + 1 : pointCount, { 0, 0 });
+
+	int startIndex = 0;
+	if (isPie) {
+		// 첫 번째 점을 중심점으로 설정
+		m_Points[0].x = static_cast<long>(fCenterPX);
+		m_Points[0].y = static_cast<long>(fCenterPY);
+		startIndex = 1;
+	}
+
+	for (int i = 0; i < pointCount; ++i) {
+		// m_PieAngle 내에서 점들을 등분하여 배치
+		float fLocalRad = (i * (m_PieAngle / (pointCount - 1))) * (M_PI / 180.0f);
+		float fLocalPX = fRadiusX * cosf(fLocalRad);
+		float fLocalPY = fRadiusY * sinf(fLocalRad);
+
+		float fRotatedPX = fLocalPX * fCosRot - fLocalPY * fSinRot;
+		float fRotatedPY = fLocalPX * fSinRot + fLocalPY * fCosRot;
+
+		m_Points[startIndex + i].x = static_cast<long>(fCenterPX + fRotatedPX);
+		m_Points[startIndex + i].y = static_cast<long>(fCenterPY - fRotatedPY);
+	}
 	return this;
 }

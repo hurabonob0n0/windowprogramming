@@ -71,3 +71,43 @@ public:
 		return pInstance;
 	}
 };
+
+class Quad : public Shape {
+public:
+	Quad() {}
+	virtual Shape* Make_Points() override;
+	static Quad* Create() {
+		Quad* pInstance = new Quad();
+		pInstance->Set_Shape(QUAD); //
+		return pInstance;
+	}
+};
+
+class Pentagon : public Shape {
+public:
+	Pentagon() {}
+	virtual Shape* Make_Points() override;
+	static Pentagon* Create() {
+		Pentagon* pInstance = new Pentagon();
+		pInstance->Set_Shape(PENTAGON); //
+		return pInstance;
+	}
+};
+
+class Circle : public Shape {
+public:
+	Circle() : m_PieAngle(360.0f) {} // 기본값 360도 (완전한 원)
+	virtual Shape* Make_Points() override;
+
+	// 파이 각도 설정 (메서드 체이닝)
+	Circle* Set_PieAngle(float angle) { m_PieAngle = angle; return this; }
+
+	static Circle* Create() {
+		Circle* pInstance = new Circle();
+		pInstance->Set_Shape(CIRCLE); //
+		return pInstance;
+	}
+
+private:
+	float m_PieAngle;
+};
