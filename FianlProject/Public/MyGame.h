@@ -20,7 +20,13 @@ private:
 private:
     // 윈도우 프로시저 (메시지 처리)
     static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+    void Create_BackBuffer();
 
 private:
     Shape* m_Shape;
+
+public:
+    HDC     m_hMemDC{ nullptr };     // 가짜 도화지 (메모리 DC)
+    HBITMAP m_hBackBitmap{ nullptr }; // 가짜 도화지용 비트맵
+    HBITMAP m_hOldBitmap{ nullptr };  // 원래 비트맵 저장용
 };

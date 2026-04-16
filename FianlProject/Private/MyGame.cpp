@@ -29,6 +29,8 @@ bool MyGame::Initialize() {
     ShowWindow(g_WinInfo.hWnd, SW_SHOW);
     UpdateWindow(g_WinInfo.hWnd);
 
+    Create_BackBuffer();
+
     m_Shape = Circle::Create()
         ->Set_PieAngle(270.0f)           // 270도만 그리기 (원의 3/4)
         ->Set_CenterPoint({ 0.5f, 0.5f })
@@ -77,10 +79,18 @@ void MyGame::Late_Update() {
 }
 
 void MyGame::Draw() {
+    if (!m_hMemDC) return;
+
+    // 1. [가짜 도화지]를 배경색으로 깨끗하게 지웁니다.
+    RECT rect = { 0, 0, g_WinInfo.WinCX, g_WinInfo.WinCY };
+    FillRect(m_hMemDC, &rect, (HBRUSH)GetStockObject(WHITE_BRUSH));
+
+    // 2. [가짜 도화지]에 도형을 그립니다.
+    m_Shape->Draw(m_hMemDC);
+
+    // 3. 완성된 [가짜 도화지]를 [실제 화면]으로 순식간에 복사합니다. (BitBlt)
     HDC hDC = GetDC(g_WinInfo.hWnd);
-
-    m_Shape->Draw(hDC);
-
+    BitBlt(hDC, 0, 0, g_WinInfo.WinCX, g_WinInfo.WinCY, m_hMemDC, 0, 0, SRCCOPY);
     ReleaseDC(g_WinInfo.hWnd, hDC);
 }
 
@@ -90,6 +100,7 @@ LRESULT CALLBACK MyGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
     case WM_SIZE: // 윈도우 크기가 변할 때 전역 변수 업데이트
         g_WinInfo.WinCX = LOWORD(lParam);
         g_WinInfo.WinCY = HIWORD(lParam);
+
         break;
 
     case WM_DESTROY:
@@ -100,4 +111,27 @@ LRESULT CALLBACK MyGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
+}
+
+void MyGame::Create_BackBuffer()
+{
+    {
+        HDC hDC = GetDC(g_WinInfo.hWnd);
+
+        // 1. 기존에 쓰던 게 있다면 삭제
+        if (m_hMemDC) {
+            SelectObject(m_hMemDC, m_hOldBitmap);
+            DeleteObject(m_hBackBitmap);
+            DeleteDC(m_hMemDC);
+        }
+
+        // 2. 새로운 메모리 DC 생성
+        m_hMemDC = CreateCompatibleDC(hDC);
+        // 3. 현재 화면과 똑같은 설정의 비트맵 생성
+        m_hBackBitmap = CreateCompatibleBitmap(hDC, g_WinInfo.WinCX, g_WinInfo.WinCY);
+        // 4. 메모리 DC에 비트맵 연결
+        m_hOldBitmap = (HBITMAP)SelectObject(m_hMemDC, m_hBackBitmap);
+
+        ReleaseDC(g_WinInfo.hWnd, hDC);
+    }
 }
