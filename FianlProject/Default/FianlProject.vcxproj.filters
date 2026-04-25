@@ -18,6 +18,9 @@
     <ClInclude Include="..\Public\shape.h">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Random_Engine.hpp">
+      <Filter>headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\MyGame.cpp">

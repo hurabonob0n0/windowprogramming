@@ -3,11 +3,10 @@
 
 int main() {
     // MyGame 인스턴스 생성 (포인터 방식)
-    MyGame* myGame = new MyGame();
+    MyGame* myGame = MyGame::Get_Instance();
 
     // 초기화 실패 시 종료
     if (!myGame->Initialize()) {
-        delete myGame;
         return -1;
     }
 
@@ -28,6 +27,5 @@ int main() {
         }
     }
 
-    delete myGame;
     return (int)msg.wParam;
 }

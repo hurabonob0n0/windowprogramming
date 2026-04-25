@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\MyGame.h" />
+    <ClInclude Include="..\Public\Random_Engine.hpp" />
     <ClInclude Include="..\Public\shape.h" />
     <ClInclude Include="..\Public\Utils.hpp" />
   </ItemGroup>

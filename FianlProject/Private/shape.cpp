@@ -151,6 +151,46 @@ Shape* Pentagon::Make_Points() {
 	return this;
 }
 
+//Shape* Circle::Make_Points() {
+//	float fBaseScale = static_cast<float>(g_WinInfo.WinCX);
+//	float fRadiusX = (m_Width * 0.5f) * fBaseScale;
+//	float fRadiusY = (m_Height * 0.5f) * fBaseScale;
+//	float fCenterPX = m_CenterPoint.fX * g_WinInfo.WinCX;
+//	float fCenterPY = (1.0f - m_CenterPoint.fY) * g_WinInfo.WinCY;
+//
+//	float fRotRad = m_Rot * (M_PI / 180.0f);
+//	float fCosRot = cosf(fRotRad), fSinRot = sinf(fRotRad);
+//
+//	// 파이 모양일 경우 중심점을 포함하기 위해 점 개수 조절
+//	bool isPie = (m_PieAngle != 360.0f);
+//	int pointCount = 64; // SHAPE::CIRCLE의 기본 크기
+//
+//	// m_Points 크기 재조정 (파이 형태면 중심점 + 1)
+//	//m_Points.assign(isPie ? pointCount + 1 : pointCount, { 0, 0 });
+//
+//	int startIndex = 0;
+//	if (isPie) {
+//		// 첫 번째 점을 중심점으로 설정
+//		m_Points[0].x = static_cast<long>(fCenterPX);
+//		m_Points[0].y = static_cast<long>(fCenterPY);
+//		startIndex = 1;
+//		pointCount = 63;
+//	}
+//
+//	for (int i = 0; i < pointCount; ++i) {
+//		// m_PieAngle 내에서 점들을 등분하여 배치
+//		float fLocalRad = (i * (m_PieAngle / (pointCount - 1))) * (M_PI / 180.0f);
+//		float fLocalPX = fRadiusX * cosf(fLocalRad);
+//		float fLocalPY = fRadiusY * sinf(fLocalRad);
+//
+//		float fRotatedPX = fLocalPX * fCosRot - fLocalPY * fSinRot;
+//		float fRotatedPY = fLocalPX * fSinRot + fLocalPY * fCosRot;
+//
+//		m_Points[startIndex + i].x = static_cast<long>(fCenterPX + fRotatedPX);
+//		m_Points[startIndex + i].y = static_cast<long>(fCenterPY - fRotatedPY);
+//	}
+//	return this;
+//}
 Shape* Circle::Make_Points() {
 	float fBaseScale = static_cast<float>(g_WinInfo.WinCX);
 	float fRadiusX = (m_Width * 0.5f) * fBaseScale;
@@ -161,32 +201,52 @@ Shape* Circle::Make_Points() {
 	float fRotRad = m_Rot * (M_PI / 180.0f);
 	float fCosRot = cosf(fRotRad), fSinRot = sinf(fRotRad);
 
-	// 파이 모양일 경우 중심점을 포함하기 위해 점 개수 조절
-	bool isPie = (m_PieAngle < 360.0f);
-	int pointCount = 64; // SHAPE::CIRCLE의 기본 크기
+	bool isPie = (m_PieAngle != 360.0f);
 
-	// m_Points 크기 재조정 (파이 형태면 중심점 + 1)
-	m_Points.assign(isPie ? pointCount + 1 : pointCount, { 0, 0 });
+	// 1. 하드코딩된 64 대신, 실제 벡터의 크기를 가져와서 기준으로 삼습니다.
+	int totalPoints = static_cast<int>(m_Points.size());
+	if (totalPoints <= 1) return this; // 방어 코드
 
-	int startIndex = 0;
 	if (isPie) {
-		// 첫 번째 점을 중심점으로 설정
+		// --- [파이 모양 (팩맨)] ---
+		// [0]번은 중심점, 나머지 점들은 호(Arc)를 그립니다.
+		int arcPointCount = totalPoints - 1;
+
 		m_Points[0].x = static_cast<long>(fCenterPX);
 		m_Points[0].y = static_cast<long>(fCenterPY);
-		startIndex = 1;
+
+		for (int i = 0; i < arcPointCount; ++i) {
+			// 명시적으로 float 캐스팅을 하여 의도치 않은 정수 나눗셈(소수점 버림)을 방지합니다.
+			float fLocalRad = (i * (m_PieAngle / static_cast<float>(arcPointCount - 1))) * (M_PI / 180.0f);
+
+			float fLocalPX = fRadiusX * cosf(fLocalRad);
+			float fLocalPY = fRadiusY * sinf(fLocalRad);
+
+			float fRotatedPX = fLocalPX * fCosRot - fLocalPY * fSinRot;
+			float fRotatedPY = fLocalPX * fSinRot + fLocalPY * fCosRot;
+
+			// 인덱스 1번부터 차례대로 넣습니다.
+			m_Points[i + 1].x = static_cast<long>(fCenterPX + fRotatedPX);
+			m_Points[i + 1].y = static_cast<long>(fCenterPY - fRotatedPY);
+		}
+	}
+	else {
+		// --- [완전한 원 (360도)] ---
+		// 중심점 없이 모든 점을 원의 테두리에만 사용합니다.
+		for (int i = 0; i < totalPoints; ++i) {
+			float fLocalRad = (i * (m_PieAngle / static_cast<float>(totalPoints - 1))) * (M_PI / 180.0f);
+
+			float fLocalPX = fRadiusX * cosf(fLocalRad);
+			float fLocalPY = fRadiusY * sinf(fLocalRad);
+
+			float fRotatedPX = fLocalPX * fCosRot - fLocalPY * fSinRot;
+			float fRotatedPY = fLocalPX * fSinRot + fLocalPY * fCosRot;
+
+			// 인덱스 0번부터 끝까지 테두리를 그립니다.
+			m_Points[i].x = static_cast<long>(fCenterPX + fRotatedPX);
+			m_Points[i].y = static_cast<long>(fCenterPY - fRotatedPY);
+		}
 	}
 
-	for (int i = 0; i < pointCount; ++i) {
-		// m_PieAngle 내에서 점들을 등분하여 배치
-		float fLocalRad = (i * (m_PieAngle / (pointCount - 1))) * (M_PI / 180.0f);
-		float fLocalPX = fRadiusX * cosf(fLocalRad);
-		float fLocalPY = fRadiusY * sinf(fLocalRad);
-
-		float fRotatedPX = fLocalPX * fCosRot - fLocalPY * fSinRot;
-		float fRotatedPY = fLocalPX * fSinRot + fLocalPY * fCosRot;
-
-		m_Points[startIndex + i].x = static_cast<long>(fCenterPX + fRotatedPX);
-		m_Points[startIndex + i].y = static_cast<long>(fCenterPY - fRotatedPY);
-	}
 	return this;
 }

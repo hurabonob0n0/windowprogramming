@@ -5,6 +5,7 @@
 #include <list>
 #include <iostream>
 #include <math.h>
+#include <memory>
 using namespace std;
 
 #ifndef M_PI

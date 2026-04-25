@@ -29,4 +29,19 @@ public:
     HDC     m_hMemDC{ nullptr };     // 가짜 도화지 (메모리 DC)
     HBITMAP m_hBackBitmap{ nullptr }; // 가짜 도화지용 비트맵
     HBITMAP m_hOldBitmap{ nullptr };  // 원래 비트맵 저장용
+
+private:
+    static unique_ptr<MyGame> m_Instance;
+
+public:
+    static MyGame* Get_Instance() {
+        if (!m_Instance) {
+            m_Instance = std::unique_ptr<MyGame>(new MyGame());
+        }
+        return m_Instance.get();
+    }
+
+    static void Destroy_Instance() {
+        m_Instance.reset(); // 이때 소멸자가 즉시 호출됨
+    }   
 };
