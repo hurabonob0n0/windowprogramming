@@ -21,6 +21,9 @@
     <ClInclude Include="..\Public\Random_Engine.hpp">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Timer.h">
+      <Filter>headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\MyGame.cpp">
@@ -30,6 +33,9 @@
       <Filter>cpps</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\shape.cpp">
+      <Filter>cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Timer.cpp">
       <Filter>cpps</Filter>
     </ClCompile>
   </ItemGroup>

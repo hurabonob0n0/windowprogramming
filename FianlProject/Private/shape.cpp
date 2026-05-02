@@ -24,7 +24,7 @@ Shape* Shape::Set_Shape(SHAPE s)
 		break;
 
 	case CIRCLE:
-		m_Points.resize(64);
+		m_Points.resize(32);
 		break;
 
 	case PENTAGON:
@@ -151,46 +151,6 @@ Shape* Pentagon::Make_Points() {
 	return this;
 }
 
-//Shape* Circle::Make_Points() {
-//	float fBaseScale = static_cast<float>(g_WinInfo.WinCX);
-//	float fRadiusX = (m_Width * 0.5f) * fBaseScale;
-//	float fRadiusY = (m_Height * 0.5f) * fBaseScale;
-//	float fCenterPX = m_CenterPoint.fX * g_WinInfo.WinCX;
-//	float fCenterPY = (1.0f - m_CenterPoint.fY) * g_WinInfo.WinCY;
-//
-//	float fRotRad = m_Rot * (M_PI / 180.0f);
-//	float fCosRot = cosf(fRotRad), fSinRot = sinf(fRotRad);
-//
-//	// 파이 모양일 경우 중심점을 포함하기 위해 점 개수 조절
-//	bool isPie = (m_PieAngle != 360.0f);
-//	int pointCount = 64; // SHAPE::CIRCLE의 기본 크기
-//
-//	// m_Points 크기 재조정 (파이 형태면 중심점 + 1)
-//	//m_Points.assign(isPie ? pointCount + 1 : pointCount, { 0, 0 });
-//
-//	int startIndex = 0;
-//	if (isPie) {
-//		// 첫 번째 점을 중심점으로 설정
-//		m_Points[0].x = static_cast<long>(fCenterPX);
-//		m_Points[0].y = static_cast<long>(fCenterPY);
-//		startIndex = 1;
-//		pointCount = 63;
-//	}
-//
-//	for (int i = 0; i < pointCount; ++i) {
-//		// m_PieAngle 내에서 점들을 등분하여 배치
-//		float fLocalRad = (i * (m_PieAngle / (pointCount - 1))) * (M_PI / 180.0f);
-//		float fLocalPX = fRadiusX * cosf(fLocalRad);
-//		float fLocalPY = fRadiusY * sinf(fLocalRad);
-//
-//		float fRotatedPX = fLocalPX * fCosRot - fLocalPY * fSinRot;
-//		float fRotatedPY = fLocalPX * fSinRot + fLocalPY * fCosRot;
-//
-//		m_Points[startIndex + i].x = static_cast<long>(fCenterPX + fRotatedPX);
-//		m_Points[startIndex + i].y = static_cast<long>(fCenterPY - fRotatedPY);
-//	}
-//	return this;
-//}
 Shape* Circle::Make_Points() {
 	float fBaseScale = static_cast<float>(g_WinInfo.WinCX);
 	float fRadiusX = (m_Width * 0.5f) * fBaseScale;

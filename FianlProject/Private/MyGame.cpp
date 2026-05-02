@@ -71,34 +71,11 @@ void MyGame::Create_MyWindow(HINSTANCE hInstance) {
         nullptr, nullptr, hInstance, nullptr);
 }
 
-void MyGame::Update() {
-    // 1. 회전값은 계속 증가해도 Make_Points에서 cos/sin을 통과하므로 문제없음
-    Rot += 0.01f;
-
-    // 2. 팩맨의 입 방향(열기/닫기)을 제어할 정적 변수 추가
-    // 1.0f 이면 각도 증가(입 닫기), -1.0f 이면 각도 감소(입 열기)
-    static float pieDir = 0.05f;
-
-    // 3. 각도 업데이트
-    PieAngle += 2.0f * pieDir; // 속도를 조금 올렸습니다
-
-    // 4. 각도가 범위를 벗어나면 방향을 반대로 뒤집음
-    if (PieAngle >= 360.0f) {
-        PieAngle = 360.0f; // 최대 360도로 고정 (완전히 입 다뭄)
-        pieDir = -0.05f;    // 다시 입 열기 모드로 전환
-    }
-    else if (PieAngle <= 270.0f) {
-        PieAngle = 270.0f; // 최소 270도로 고정 (완전히 입 벌림)
-        pieDir = 0.05f;     // 다시 입 닫기 모드로 전환
-    }
-
-    // 5. 그리기 적용 (체이닝 순서 팁 적용)
-    ((Circle*)m_Shape)->Set_PieAngle(PieAngle)->Set_Rot(Rot)->Make_Points();
+void MyGame::Update(float dt) {
 
 }
 
-void MyGame::Late_Update() {
-    // 로직 후처리
+void MyGame::Late_Update(float dt) {
 }
 
 void MyGame::Draw() {

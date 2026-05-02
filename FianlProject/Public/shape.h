@@ -6,7 +6,7 @@ typedef struct tagFPoint {
 	float fY{ -1 };
 
 	tagFPoint& operator += (const tagFPoint& other) { fX += other.fX; fY += other.fY; return *this; }
-	// 관례적으로 대입 연산자는 자기 자신의 참조를 반환합니다. (a = b = c; 가능하게 함)
+		// 관례적으로 대입 연산자는 자기 자신의 참조를 반환합니다. (a = b = c; 가능하게 함)
 	tagFPoint& operator = (const tagFPoint& other) {
 		// 나 자신을 대입하는 경우(a = a)를 대비한 방어 코드
 		if (this != &other) {
@@ -51,10 +51,10 @@ protected:
 	float			m_Width{ -1 }, m_Height{ -1 };
 	vector<POINT>	m_Points;
 	float			m_Rot{ -1 };
-	COLORREF		m_LineColor{ RGB(0, 0, 0) }; // 기본 검은색
-	int				m_LineWidth{ 3 };           // 기본 두께 1
-	COLORREF		m_FillColor{ RGB(255, 255, 255) }; // 기본 흰색
-	bool			m_UseFill{ true };          // 채우기 여부
+	COLORREF		m_LineColor{ RGB(0, 0, 0) };		// 기본 검은색
+	int				m_LineWidth{ 3 };					// 기본 두께 1
+	COLORREF		m_FillColor{ RGB(255, 255, 255) };	// 기본 흰색
+	bool			m_UseFill{ true };					// 채우기 여부
 };
 
 class Tri : public Shape {
