@@ -13,7 +13,7 @@ private:
     // 복사 생성자와 대입 연산자 삭제
     MyRandom(const MyRandom&) = delete;
     MyRandom& operator=(const MyRandom&) = delete;
-    static MyRandom* Instance;
+    //static MyRandom* Instance;
 
 
 public:

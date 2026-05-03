@@ -1,6 +1,6 @@
 #pragma once
 #include "Utils.hpp"
-#include "shape.h"
+#include "GameObject.h"
 
 class MyGame {
 public:
@@ -23,7 +23,7 @@ private:
     void Create_BackBuffer();
 
 private:
-    Shape* m_Shape;
+    GameObject* m_Shape;
 
 public:
     HDC     m_hMemDC{ nullptr };     // 가짜 도화지 (메모리 DC)

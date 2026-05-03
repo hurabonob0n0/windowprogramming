@@ -34,14 +34,10 @@ bool MyGame::Initialize() {
 
     Create_BackBuffer();
 
-    m_Shape = Circle::Create()
-        ->Set_PieAngle(270.0f)           // 270도만 그리기 (원의 3/4)
-        ->Set_CenterPoint({ 0.5f, 0.5f })
-        ->Set_Width_Height(0.4f, 0.4f)
-        ->Set_Line(RGB(0, 0, 0), 2)
-        ->Set_Fill(RGB(255, 255, 0))     // 노란색 팩맨!
-        ->Set_Rot(45.0f)                 // 45도 회전시켜서 입 방향 조절
-        ->Make_Points();
+    Shape::Build_Geometrys();
+
+    m_Shape = new GameObject();
+    m_Shape->Initialize();
 
     return true;
 }
@@ -72,7 +68,7 @@ void MyGame::Create_MyWindow(HINSTANCE hInstance) {
 }
 
 void MyGame::Update(float dt) {
-
+    m_Shape->Update(dt);
 }
 
 void MyGame::Late_Update(float dt) {
@@ -85,7 +81,6 @@ void MyGame::Draw() {
     RECT rect = { 0, 0, g_WinInfo.WinCX, g_WinInfo.WinCY };
     FillRect(m_hMemDC, &rect, (HBRUSH)GetStockObject(WHITE_BRUSH));
 
-    // 2. [가짜 도화지]에 도형을 그립니다.
     m_Shape->Draw(m_hMemDC);
 
     // 3. 완성된 [가짜 도화지]를 [실제 화면]으로 순식간에 복사합니다. (BitBlt)

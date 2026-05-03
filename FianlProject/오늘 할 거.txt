@@ -1,0 +1,1 @@
+Component, GameObject, Shape, Sprite(대충만 만들기), Transform, Mouse, Camera 만들기

@@ -7,6 +7,18 @@
     <Filter Include="cpps">
       <UniqueIdentifier>{3ad8c941-170e-4e98-989b-8d8630008c03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{de592cb9-6f37-40b9-ba71-8279d78b1694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Transform">
+      <UniqueIdentifier>{1a28b13e-0256-4fe3-a620-e8ca08cdd366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Shape">
+      <UniqueIdentifier>{8b79e289-9745-41fb-adcd-57906e12f011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{e5c6123c-a0aa-4e98-9ecf-e6cf82abec6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\MyGame.h">
@@ -15,14 +27,23 @@
     <ClInclude Include="..\Public\Utils.hpp">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\shape.h">
-      <Filter>headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Random_Engine.hpp">
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Timer.h">
       <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Component.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Transform.h">
+      <Filter>Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\shape.h">
+      <Filter>Component\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GameObject.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -32,11 +53,20 @@
     <ClCompile Include="..\Private\main.cpp">
       <Filter>cpps</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\shape.cpp">
-      <Filter>cpps</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Timer.cpp">
       <Filter>cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Component.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Transform.cpp">
+      <Filter>Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\shape.cpp">
+      <Filter>Component\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GameObject.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,6 +8,10 @@
 #include <memory>
 using namespace std;
 
+#include <DirectXMath.h>
+
+using namespace DirectX;
+
 #ifndef M_PI
 #define M_PI 3.14159265358979323846f
 #endif
