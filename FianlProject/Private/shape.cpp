@@ -87,8 +87,8 @@ Shape* Shape::Make_Points() {
 
         // 5. 도형의 모양(오프셋)은 오직 X축 길이(fWinCX) 하나로만 통일하여 더해줍니다!
         // (화면 좌표계는 아래로 갈수록 +Y이므로 오프셋은 빼줍니다)
-        float finalX = centerX + (offsetX * fWinCX);
-        float finalY = centerY - (offsetY * fWinCX);
+        float finalX = centerX + (offsetX * fWinCY);
+        float finalY = centerY - (offsetY * fWinCY);
 
         m_Points[i].x = static_cast<long>(finalX);
         m_Points[i].y = static_cast<long>(finalY);

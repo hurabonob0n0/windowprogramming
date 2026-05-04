@@ -3,6 +3,11 @@
 #include "Timer.h"
 
 int main() {
+#ifdef _DEBUG
+    // 메모리 누수 체크 플래그 켜기
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
+
     // MyGame 인스턴스 생성 (포인터 방식)
     MyGame* myGame = MyGame::Get_Instance();
 

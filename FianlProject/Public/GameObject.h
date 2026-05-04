@@ -16,15 +16,13 @@ public:
     ~GameObject() = default;
 
     void Initialize() {
-        Add_Component<Shape>()->Set_Transform(m_Transform)->Set_Shape(QUAD);
-        m_Transform->Set_Position(0.5, 0.5);
     }
 
     void Update(float dt) { 
-        m_Transform->Turn(XMConvertToRadians(90) * dt); Get_Component<Shape>()->Make_Points();
+       // m_Transform->Turn(XMConvertToRadians(90) * dt); Get_Component<Shape>()->Make_Points();
     }
 
-    void Draw(HDC hDC) { Get_Component<Shape>()->Draw(hDC); }
+    void Draw(HDC hDC) {};//Get_Component<Shape>()->Draw(hDC);}
 
     // 빈번하게 사용되는 Transform은 바로 반환
     Transform* Get_Transform() const { return m_Transform; }

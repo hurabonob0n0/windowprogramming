@@ -1,4 +1,11 @@
 #pragma once
+// 메모리 릭 검출을 위한 매크로 및 헤더 (디버그 모드에서만 동작)
+#ifdef _DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+#endif
+
 #include <Windows.h>
 #include <string>
 #include <vector>
