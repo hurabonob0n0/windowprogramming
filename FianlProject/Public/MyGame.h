@@ -27,6 +27,7 @@ private:
 
 private:
     GameObject* m_Shape;
+	GameObject* m_Board;
     GameObject* m_Camera;
 
     RenderManager* m_RM = nullptr;

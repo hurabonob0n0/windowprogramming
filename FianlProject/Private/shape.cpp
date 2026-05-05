@@ -1,7 +1,10 @@
 #include "shape.h"
 #include "GameObject.h"
+#include "BaseObject.h"
 
 std::vector<DirectX::XMFLOAT3> Shape::m_LocalPoints[SHAPE_END];
+
+Shape::Shape(GameObject* owner) : Component(owner) { m_pTransform = owner->Get_Transform(); }
 
 // 도형의 기본 생김새(로컬 정점)를 최초 한 번만 만듭니다.
 void Shape::Build_Geometrys() {
@@ -68,8 +71,6 @@ Shape* Shape::Set_Shape(SHAPE s) {
 
     return this;
 }
-
-
 
 void Shape::Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix)
 {

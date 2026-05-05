@@ -37,6 +37,9 @@
     <Filter Include="02.GameObject\01.BaseObject">
       <UniqueIdentifier>{d567edb0-19c0-4fe6-819f-83af97a24722}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\02.Board">
+      <UniqueIdentifier>{ed169c49-22d0-458b-b44d-f5c39bc21d25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Utils.hpp">
@@ -72,6 +75,9 @@
     <ClInclude Include="..\Public\BaseObject.h">
       <Filter>02.GameObject\01.BaseObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Board.h">
+      <Filter>02.GameObject\02.Board</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Component.cpp">
@@ -100,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\BaseObject.cpp">
       <Filter>02.GameObject\01.BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Board.cpp">
+      <Filter>02.GameObject\02.Board</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,7 @@
 #include "MyGame.h"
 #include <iostream>
+#include "Board.h"
+
 
 WinInfo g_WinInfo = { nullptr, 800, 600 };
 
@@ -45,9 +47,13 @@ bool MyGame::Initialize() {
     m_Camera = new Camera();
     m_Camera->Initialize();
 
-    //=======================BaseObject=================
-    m_Shape = new BaseObject();
-    m_Shape->Initialize();
+    //=======================BaseObject==================
+     m_Shape = new BaseObject();
+     m_Shape->Initialize();
+
+    //=======================Board=======================
+    m_Board = new Board();
+	m_Board->Initialize();
 
     return true;
 }
@@ -78,11 +84,13 @@ void MyGame::Create_MyWindow(HINSTANCE hInstance) {
 }
 
 void MyGame::Update(float dt) {
-    m_Shape->Update(dt);
+	m_Shape->Update(dt);
+    m_Board->Update(dt);
 }
 
 void MyGame::Late_Update(float dt) {
-    m_Shape->Late_Update(dt);
+	m_Shape->Late_Update(dt);
+    m_Board->Late_Update(dt);
     m_Camera->Late_Update(dt);
 }
 
@@ -94,7 +102,8 @@ void MyGame::Draw() {
     FillRect(m_hMemDC, &rect, (HBRUSH)GetStockObject(WHITE_BRUSH));
 
     //2. 여기에 그립니다.
-    m_Shape->Draw(m_hMemDC,m_RM->Get_ViewMatrix(),m_RM->Get_ProjMatrix());
+    m_Board->Draw(m_hMemDC,m_RM->Get_ViewMatrix(),m_RM->Get_ProjMatrix());
+    m_Shape->Draw(m_hMemDC, m_RM->Get_ViewMatrix(), m_RM->Get_ProjMatrix());
 
     // 3. 완성된 [가짜 도화지]를 [실제 화면]으로 순식간에 복사합니다. (BitBlt)
     HDC hDC = GetDC(g_WinInfo.hWnd);
@@ -108,8 +117,6 @@ LRESULT CALLBACK MyGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
     case WM_SIZE: // 윈도우 크기가 변할 때 전역 변수 업데이트
         g_WinInfo.WinCX = LOWORD(lParam);
         g_WinInfo.WinCY = HIWORD(lParam);
-
-        cout << "가로 : " << g_WinInfo.WinCX << "세로 : " << g_WinInfo.WinCY << endl;
         MyGame::Get_Instance()->Create_BackBuffer();
         break;
 

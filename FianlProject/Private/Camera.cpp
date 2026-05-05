@@ -20,19 +20,19 @@ void Camera::Late_Update(float dt)
 	}
 	else {
 		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-			m_Transform->Go_Right(dt);
+			m_Transform->Go_Right(dt*1000);
 		if (GetAsyncKeyState(VK_UP) & 0x8000)
-			m_Transform->Go_Up(dt);
+			m_Transform->Go_Up(dt * 1000);
 		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-			m_Transform->Go_Left(dt);
+			m_Transform->Go_Left(dt * 1000);
 		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-			m_Transform->Go_Down(dt);
+			m_Transform->Go_Down(dt * 1000);
 	}
 
 	m_RM->Set_ViewMatrix(m_Transform->Get_WorldMatrixInv());
 	
 
-	//===============주석처리한 부분은 종횡비로 계산====================
+	//===============이 부분은 종횡비로 계산====================
 	//// 1. 화면의 종횡비 (세로 / 가로) 계산
 	//float aspectRatio = (float)g_WinInfo.WinCX / (float)g_WinInfo.WinCY;
 

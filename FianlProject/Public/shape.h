@@ -8,7 +8,7 @@ enum SHAPE{TRI,QUAD,CIRCLE,PENTAGON,SHAPE_END};
 
 class Shape : public Component{
 public:
-	Shape(GameObject* owner) : Component(owner) {};
+	Shape(GameObject* owner);
 	virtual ~Shape() {};
 
 public:
