@@ -4,6 +4,7 @@
 #include "RenderManager.h"
 #include "Camera.h"
 #include "BaseObject.h"
+#include "HW4_3.h"
 
 class MyGame {
 public:
@@ -26,10 +27,8 @@ private:
     void Create_BackBuffer();
 
 private:
-    GameObject* m_Shape;
-	GameObject* m_Board;
     GameObject* m_Camera;
-
+    HW4_3* m_HW4_3;
     RenderManager* m_RM = nullptr;
 
 public:

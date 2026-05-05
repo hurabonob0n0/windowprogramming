@@ -19,6 +19,17 @@ void Shape::Build_Geometrys() {
         case PENTAGON: sides = 5; break;
         case CIRCLE: sides = 32; break;
         }
+        if (sides == 4) {
+            XMFLOAT3 localpos{ 0.5f,0.5,0.f };
+            m_LocalPoints[QUAD].push_back(localpos);
+            localpos = { -0.5,0.5,0.f };
+            m_LocalPoints[QUAD].push_back(localpos);
+            localpos = { -0.5,-0.5,0.f };
+            m_LocalPoints[QUAD].push_back(localpos);
+            localpos = { 0.5,-0.5,0.f };
+            m_LocalPoints[QUAD].push_back(localpos);
+            continue;
+        }
 
         // 크기가 1.0(반지름 0.5)인 기본 도형을 원점(0,0)을 기준으로 생성합니다.
         float radius = 0.5f;

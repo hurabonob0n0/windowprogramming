@@ -25,9 +25,6 @@
     <Filter Include="00.System\MyGame">
       <UniqueIdentifier>{33da0358-40ab-4522-835c-e6ba39f86141}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.System\RE">
-      <UniqueIdentifier>{8b0edaa1-c75f-4bca-8d86-915e0a483e6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.System\Timer">
       <UniqueIdentifier>{4be93039-00c3-49ce-985e-d0c9ee97c587}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,21 @@
     </Filter>
     <Filter Include="02.GameObject\02.Board">
       <UniqueIdentifier>{ed169c49-22d0-458b-b44d-f5c39bc21d25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\03.과제">
+      <UniqueIdentifier>{f27e6d63-9da6-4d82-9dc9-412af1cd80d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\03.과제\4-2">
+      <UniqueIdentifier>{3a8a5e65-9c8c-4924-87fd-456121571891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\RawInput">
+      <UniqueIdentifier>{11b01f12-452e-420b-b44e-7c5b5edb66d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\RandomEngine">
+      <UniqueIdentifier>{8b0edaa1-c75f-4bca-8d86-915e0a483e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\03.과제\4-3">
+      <UniqueIdentifier>{7cdf89c0-5d9f-4475-b15b-01b5c6088c6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +76,7 @@
       <Filter>00.System\MyGame</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Random_Engine.hpp">
-      <Filter>00.System\RE</Filter>
+      <Filter>00.System\RandomEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Timer.h">
       <Filter>00.System\Timer</Filter>
@@ -77,6 +89,15 @@
     </ClInclude>
     <ClInclude Include="..\Public\Board.h">
       <Filter>02.GameObject\02.Board</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\HW4_2.h">
+      <Filter>02.GameObject\03.과제\4-2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RawInput.hpp">
+      <Filter>00.System\RawInput</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\HW4_3.h">
+      <Filter>02.GameObject\03.과제\4-3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +130,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\Board.cpp">
       <Filter>02.GameObject\02.Board</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\HW4_2.cpp">
+      <Filter>02.GameObject\03.과제\4-2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\HW4_3.cpp">
+      <Filter>02.GameObject\03.과제\4-3</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

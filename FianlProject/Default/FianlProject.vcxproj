@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Public\HW4_2.h" />
     <ClInclude Include="..\Public\BaseObject.h" />
     <ClInclude Include="..\Public\Board.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -139,8 +140,10 @@
     <ClInclude Include="..\Public\Camera.h" />
     <ClInclude Include="..\Public\Component.h" />
     <ClInclude Include="..\Public\GameObject.h" />
+    <ClInclude Include="..\Public\HW4_3.h" />
     <ClInclude Include="..\Public\MyGame.h" />
     <ClInclude Include="..\Public\Random_Engine.hpp" />
+    <ClInclude Include="..\Public\RawInput.hpp" />
     <ClInclude Include="..\Public\RenderManager.h" />
     <ClInclude Include="..\Public\shape.h" />
     <ClInclude Include="..\Public\Timer.h" />
@@ -148,6 +151,7 @@
     <ClInclude Include="..\Public\Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Private\HW4_2.cpp" />
     <ClCompile Include="..\Private\BaseObject.cpp" />
     <ClCompile Include="..\Private\Board.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -156,6 +160,7 @@
     <ClCompile Include="..\Private\Camera.cpp" />
     <ClCompile Include="..\Private\Component.cpp" />
     <ClCompile Include="..\Private\GameObject.cpp" />
+    <ClCompile Include="..\Private\HW4_3.cpp" />
     <ClCompile Include="..\Private\main.cpp" />
     <ClCompile Include="..\Private\MyGame.cpp" />
     <ClCompile Include="..\Private\shape.cpp" />

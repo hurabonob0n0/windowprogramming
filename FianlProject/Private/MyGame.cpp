@@ -1,9 +1,10 @@
 #include "MyGame.h"
 #include <iostream>
 #include "Board.h"
+#include "RawInput.hpp"
 
 
-WinInfo g_WinInfo = { nullptr, 800, 600 };
+WinInfo g_WinInfo = { nullptr, 1600, 920};
 
 std::unique_ptr<MyGame> MyGame::m_Instance = nullptr;
 unique_ptr<RenderManager> RenderManager::m_Instance = nullptr;
@@ -16,11 +17,11 @@ float PieAngle = 270.f;
 
 bool MyGame::Initialize() {
     // 1. 콘솔에서 크기 입력받기
-    std::cout << "--- Window Setup ---" << std::endl;
+    /*std::cout << "--- Window Setup ---" << std::endl;
     std::cout << "Width (pixel): ";
     std::cin >> g_WinInfo.WinCX;
     std::cout << "Height (pixel): ";
-    std::cin >> g_WinInfo.WinCY;
+    std::cin >> g_WinInfo.WinCY;*/
 
     HINSTANCE hInstance = GetModuleHandle(NULL); // 현재 실행 파일의 hInstance 가져오기
 
@@ -31,6 +32,8 @@ bool MyGame::Initialize() {
     Create_MyWindow(hInstance);
 
     if (!g_WinInfo.hWnd) return false;
+
+    g_RawInput->Initialize(g_WinInfo.hWnd);
 
     ShowWindow(g_WinInfo.hWnd, SW_SHOW);
     UpdateWindow(g_WinInfo.hWnd);
@@ -46,14 +49,11 @@ bool MyGame::Initialize() {
     //=======================Camera======================
     m_Camera = new Camera();
     m_Camera->Initialize();
+    m_Camera->Get_Component<Transform>()->Set_Position(800, 450);
 
-    //=======================BaseObject==================
-     m_Shape = new BaseObject();
-     m_Shape->Initialize();
-
-    //=======================Board=======================
-    m_Board = new Board();
-	m_Board->Initialize();
+    //=======================HW4_3========================
+    m_HW4_3 = new HW4_3();
+    m_HW4_3->Initialize();
 
     return true;
 }
@@ -84,13 +84,12 @@ void MyGame::Create_MyWindow(HINSTANCE hInstance) {
 }
 
 void MyGame::Update(float dt) {
-	m_Shape->Update(dt);
-    m_Board->Update(dt);
+    m_HW4_3->Update(dt);
 }
 
 void MyGame::Late_Update(float dt) {
-	m_Shape->Late_Update(dt);
-    m_Board->Late_Update(dt);
+
+    m_HW4_3->Late_Update(dt);
     m_Camera->Late_Update(dt);
 }
 
@@ -99,11 +98,10 @@ void MyGame::Draw() {
 
     // 1. [가짜 도화지]를 배경색으로 깨끗하게 지웁니다.
     RECT rect = { 0, 0, g_WinInfo.WinCX, g_WinInfo.WinCY };
-    FillRect(m_hMemDC, &rect, (HBRUSH)GetStockObject(WHITE_BRUSH));
+    FillRect(m_hMemDC, &rect, (HBRUSH)GetStockObject(LTGRAY_BRUSH));
 
     //2. 여기에 그립니다.
-    m_Board->Draw(m_hMemDC,m_RM->Get_ViewMatrix(),m_RM->Get_ProjMatrix());
-    m_Shape->Draw(m_hMemDC, m_RM->Get_ViewMatrix(), m_RM->Get_ProjMatrix());
+    m_HW4_3->Draw(m_hMemDC, m_RM->Get_ViewMatrix(), m_RM->Get_ProjMatrix());
 
     // 3. 완성된 [가짜 도화지]를 [실제 화면]으로 순식간에 복사합니다. (BitBlt)
     HDC hDC = GetDC(g_WinInfo.hWnd);
@@ -118,6 +116,9 @@ LRESULT CALLBACK MyGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
         g_WinInfo.WinCX = LOWORD(lParam);
         g_WinInfo.WinCY = HIWORD(lParam);
         MyGame::Get_Instance()->Create_BackBuffer();
+
+        g_RawInput->Update_InputDev(lParam);
+
         break;
 
     case WM_DESTROY:

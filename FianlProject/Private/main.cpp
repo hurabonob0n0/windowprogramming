@@ -1,6 +1,11 @@
 #pragma once
 #include "MyGame.h"
 #include "Timer.h"
+#include "RawInput.hpp"
+#include "Random_Engine.hpp"
+
+unique_ptr<RawInput> g_RawInput = make_unique<RawInput>();
+MyRandom* g_Random = MyRandom::GetInstance();
 
 int main() {
 #ifdef _DEBUG
@@ -12,7 +17,7 @@ int main() {
     MyGame* myGame = MyGame::Get_Instance();
 
     Timer gameTimer;
-    float minFrameSec = 0.016f;
+    float minFrameSec = 0.001f;
     float framesec = 0;
 
     // 초기화 실패 시 종료
@@ -44,6 +49,8 @@ int main() {
             myGame->Late_Update(framesec);
             myGame->Draw();
             framesec = 0;
+
+            g_RawInput->EndFrame();
         }
     }
 
