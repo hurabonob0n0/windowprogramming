@@ -1,6 +1,9 @@
 #pragma once
 #include "Utils.hpp"
 #include "GameObject.h"
+#include "RenderManager.h"
+#include "Camera.h"
+#include "BaseObject.h"
 
 class MyGame {
 public:
@@ -24,6 +27,9 @@ private:
 
 private:
     GameObject* m_Shape;
+    GameObject* m_Camera;
+
+    RenderManager* m_RM = nullptr;
 
 public:
     HDC     m_hMemDC{ nullptr };     // 가짜 도화지 (메모리 DC)

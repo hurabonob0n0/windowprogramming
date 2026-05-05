@@ -25,7 +25,7 @@ public:
             XMVectorGetX(XMVector3Length(Get_State(STATE_LOOK))));
     }
     XMMATRIX Get_WorldMatrix() const { return XMLoadFloat4x4(&m_WorldMatrix); }
-
+    XMMATRIX Get_WorldMatrixInv() const { return XMMatrixInverse(nullptr, XMLoadFloat4x4(&m_WorldMatrix)); }
 
 public:
     //Setters
@@ -69,6 +69,18 @@ public:
         Set_State(STATE_RIGHT, XMVector3TransformNormal(vRight, RotationMatrix) * vScaled.x);
         Set_State(STATE_UP, XMVector3TransformNormal(vUp, RotationMatrix) * vScaled.y);
         Set_State(STATE_LOOK, XMVector3TransformNormal(vLook, RotationMatrix) * vScaled.z);
+    }
+    void Go_Right(float SpeedXTimeDelta) {
+        m_WorldMatrix._41 += SpeedXTimeDelta;
+    }
+    void Go_Up(float SpeedXTimeDelta) {
+        m_WorldMatrix._42 += SpeedXTimeDelta;
+    }
+    void Go_Left(float SpeedXTimeDelta) {
+        m_WorldMatrix._41 -= SpeedXTimeDelta;
+    }
+    void Go_Down(float SpeedXTimeDelta) {
+        m_WorldMatrix._42 -= SpeedXTimeDelta;
     }
 
 private:

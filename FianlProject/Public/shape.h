@@ -12,7 +12,8 @@ public:
 	virtual ~Shape() {};
 
 public:
-	void			Draw(HDC hDC);
+	virtual void	Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix);
+	virtual Shape*	Make_Points(DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix);
 	Shape*			Set_Line(COLORREF color, int width = 3) {
 		m_LineColor = color;
 		m_LineWidth = width;
@@ -23,10 +24,9 @@ public:
 		m_UseFill = useFill;
 		return this;
 	}
-	virtual Shape*	Make_Points();
 
 public:
-	Shape*			Set_Transform(Transform* pTransform) { m_pTransform = pTransform; return this; }
+	Shape*			Set_Transform(Transform* pTransform = nullptr);
 	Shape*			Set_Shape(SHAPE s);
 
 public:

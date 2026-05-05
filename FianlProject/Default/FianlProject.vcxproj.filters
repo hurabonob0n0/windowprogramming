@@ -1,72 +1,105 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="headers">
+    <Filter Include="00.System">
+      <UniqueIdentifier>{64964ede-8406-494d-b8e2-3808f1588e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.headers">
       <UniqueIdentifier>{16727a91-ef8d-45eb-8c89-49023ec968e4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpps">
-      <UniqueIdentifier>{3ad8c941-170e-4e98-989b-8d8630008c03}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component">
-      <UniqueIdentifier>{de592cb9-6f37-40b9-ba71-8279d78b1694}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Transform">
-      <UniqueIdentifier>{1a28b13e-0256-4fe3-a620-e8ca08cdd366}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Shape">
-      <UniqueIdentifier>{8b79e289-9745-41fb-adcd-57906e12f011}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
+    <Filter Include="02.GameObject">
       <UniqueIdentifier>{e5c6123c-a0aa-4e98-9ecf-e6cf82abec6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Component">
+      <UniqueIdentifier>{de592cb9-6f37-40b9-ba71-8279d78b1694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Component\Transform">
+      <UniqueIdentifier>{1a28b13e-0256-4fe3-a620-e8ca08cdd366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Component\Shape">
+      <UniqueIdentifier>{8b79e289-9745-41fb-adcd-57906e12f011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.Camera">
+      <UniqueIdentifier>{8d457d80-40cb-43d7-aab5-9c6025c2cd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\MyGame">
+      <UniqueIdentifier>{33da0358-40ab-4522-835c-e6ba39f86141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\RE">
+      <UniqueIdentifier>{8b0edaa1-c75f-4bca-8d86-915e0a483e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\Timer">
+      <UniqueIdentifier>{4be93039-00c3-49ce-985e-d0c9ee97c587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\RenderManager">
+      <UniqueIdentifier>{bf7c62ee-4227-4b1e-b014-32985e954ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01.BaseObject">
+      <UniqueIdentifier>{d567edb0-19c0-4fe6-819f-83af97a24722}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Public\MyGame.h">
-      <Filter>headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Utils.hpp">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Random_Engine.hpp">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Timer.h">
-      <Filter>headers</Filter>
+      <Filter>99.headers</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Component.h">
-      <Filter>Component</Filter>
+      <Filter>01.Component</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Transform.h">
-      <Filter>Component\Transform</Filter>
+      <Filter>01.Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\shape.h">
-      <Filter>Component\Shape</Filter>
+      <Filter>01.Component\Shape</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\GameObject.h">
-      <Filter>GameObject</Filter>
+      <Filter>02.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Camera.h">
+      <Filter>02.GameObject\00.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyGame.h">
+      <Filter>00.System\MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Random_Engine.hpp">
+      <Filter>00.System\RE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Timer.h">
+      <Filter>00.System\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RenderManager.h">
+      <Filter>00.System\RenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BaseObject.h">
+      <Filter>02.GameObject\01.BaseObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Private\MyGame.cpp">
-      <Filter>cpps</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\main.cpp">
-      <Filter>cpps</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Timer.cpp">
-      <Filter>cpps</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Component.cpp">
-      <Filter>Component</Filter>
+      <Filter>01.Component</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Transform.cpp">
-      <Filter>Component\Transform</Filter>
+      <Filter>01.Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\shape.cpp">
-      <Filter>Component\Shape</Filter>
+      <Filter>01.Component\Shape</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\GameObject.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>02.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\main.cpp">
+      <Filter>00.System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Camera.cpp">
+      <Filter>02.GameObject\00.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MyGame.cpp">
+      <Filter>00.System\MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Timer.cpp">
+      <Filter>00.System\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BaseObject.cpp">
+      <Filter>02.GameObject\01.BaseObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
