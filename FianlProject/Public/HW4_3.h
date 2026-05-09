@@ -89,7 +89,11 @@ public:
 	// 공 이동 관련 함수
 	void Fire();
 	void Reset_Position(float barX, float barY);
-	void Set_SpeedMultiplier(float amount) { m_Speed += amount; }
+	void Set_SpeedMultiplier(float amount) { 
+		m_Speed += amount; 
+		if (m_Speed < 200.0f) m_Speed = 200.0f; // 최소 속도 제한
+		if (m_Speed > 2000.0f) m_Speed = 2000.0f; // 최대 속도 제한
+	 }
 
 	// 바와 충돌했을 때 스핀을 먹이는 특수 반사 함수
 	void Bounce_Off_Bar(float barVelocityX);
@@ -142,5 +146,5 @@ private:
 	// 통계용 변수
 	int m_ChangedColorCount = 0;
 	int m_DisappearedCount = 0;
-	float m_StartTime = 0.0f; // T 명령어용
+	float m_Time = 0.0f; // T 명령어용
 };

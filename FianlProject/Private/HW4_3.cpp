@@ -8,6 +8,11 @@ GameObject* HW4_3::Initialize()
 	int sizeX{ 100 }, sizeY{ 25 };
 	int marginX = 600, marginY = 100;
 
+	m_ChangedColorCount = 0;
+	m_DisappearedCount = 0;
+
+	m_Blocks.clear();
+
 	m_Blocks.resize(3);
 
 	for (int i = 2; i >= 0; --i) {
@@ -30,10 +35,9 @@ GameObject* HW4_3::Initialize()
 
 void HW4_3::Update(float dt)
 {
-	if (g_RawInput->Key_Down('Q'));
-	if (g_RawInput->Key_Pressing('Q'));
-	if (g_RawInput->Key_Up('Q'));
-
+	m_Time += dt; // T 명령어용
+	
+	if (m_isPaused) return; // 일시정지면 아래 로직을 스킵
 
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 10; ++j) {
@@ -55,23 +59,33 @@ void HW4_3::Late_Update(float dt)
 	if (m_isPaused) return; // 일시정지면 아래 로직을 스킵
 
 	//if (g_RawInput->Key_Down('S')) m_Ball->Fire();
-	if (GetAsyncKeyState('S') & 0x8000) m_Ball->Fire();
-	if (g_RawInput->Key_Down(VK_ADD)) m_Ball->Set_SpeedMultiplier(50.0f);
-	if (g_RawInput->Key_Down(VK_SUBTRACT)) m_Ball->Set_SpeedMultiplier(-50.0f);
+	if (g_RawInput->Key_Down('S')) m_Ball->Fire();
+
 
 	// 2. 바와 공 업데이트
 	m_Bar->Update(dt);
 
 	
-
 	// 3. 벽돌 좌우 이동 (Grid 이동)
-	m_GridOffsetX += m_GridMoveDir * 100.0f * dt;
-	if (m_GridOffsetX > 200.0f || m_GridOffsetX < -200.0f) m_GridMoveDir *= -1.0f;
+	/*m_GridOffsetX += m_GridMoveDir * 100.0f * dt;
+	if (m_GridOffsetX > 200.0f || m_GridOffsetX < -200.0f) m_GridMoveDir *= -1.0f;*/
 	// 모든 Block들의 Transform 위치에 m_GridOffsetX를 반영해 주어야 함
 
 	// 4. 간단한 화면 벽 충돌 로직
-	if (m_Ball->Get_X() <= 0 || m_Ball->Get_X() >= g_WinInfo.WinCX) m_Ball->Reverse_X();
-	if (m_Ball->Get_Y() >= g_WinInfo.WinCY) m_Ball->Reverse_Y();
+	if (m_Ball->Get_X() <= 0) {
+		m_Ball->Get_Transform()->Set_Position(5.0f, m_Ball->Get_Y()); // 왼쪽 벽에 파고드는 현상 방지 위해 위치 보정
+		m_Ball->Reverse_X();
+	}
+
+	if (m_Ball->Get_X() >= g_WinInfo.WinCX) {
+		m_Ball->Get_Transform()->Set_Position(g_WinInfo.WinCX - 5.f, m_Ball->Get_Y()); // 왼쪽 벽에 파고드는 현상 방지 위해 위치 보정
+		m_Ball->Reverse_X();
+	}
+
+	if (m_Ball->Get_Y() >= g_WinInfo.WinCY) {
+		m_Ball->Get_Transform()->Set_Position(m_Ball->Get_X(), g_WinInfo.WinCY - 5.f); // 천장에 파고드는 현상 방지 위해 위치 보정
+		m_Ball->Reverse_Y();
+	}
 
 	// 바닥으로 떨어졌을 때 (놓침)
 	if (m_Ball->Get_Y() <= 0) {
@@ -89,7 +103,7 @@ void HW4_3::Late_Update(float dt)
 
 	float barX = m_Bar->Get_Transform()->Get_State(Transform::STATE_POSITION).m128_f32[0];
 	float barY = m_Bar->Get_Transform()->Get_State(Transform::STATE_POSITION).m128_f32[1];
-	float barHalfW = 10000.0f; // 바 너비 200 / 2
+	float barHalfW = 100.0f; // 바 너비 200 / 2
 	float barHalfH = 25.0f;  // 바 높이 50 / 2
 
 	// AABB 충돌 판정 (공 vs 바)
@@ -209,6 +223,12 @@ void HW4_3::Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX proj
 	m_Bar->Draw(hDC, viewMatrix, projMatrix);
 
 	m_Ball->Draw(DrawInputs);
+
+	wstring text = L"시간: " + to_wstring(static_cast<int>(m_Time)) + L"초, 색 변경된 벽돌: " + to_wstring(m_ChangedColorCount) + L", 사라진 벽돌: " + to_wstring(m_DisappearedCount);
+
+	if (g_RawInput->Key_Pressing('T')) {
+		TextOut(hDC, 300, 0, text.c_str(), static_cast<int>(text.length()));
+	}
 }
 
 
@@ -299,15 +319,18 @@ void Ball::Update(float dt)
 {
 	if (!m_isFired) return; // S키를 누르기 전에는 움직이지 않음
 
+	if (g_RawInput->Key_Down('K')) Set_SpeedMultiplier(250.0f);
+	if (g_RawInput->Key_Down('L')) Set_SpeedMultiplier(-250.0f);
 	// 방향 * 속도 * dt 로 이동
 	float currentX = Get_X();
 	float currentY = Get_Y();
-	m_Transform->Set_Position(currentX + (m_DirX * dt), currentY + (m_DirY * dt));
+	m_Transform->Set_Position(currentX + (m_DirX * m_Speed * dt), currentY + (m_DirY * m_Speed * dt));
 	//cout << "x : " << m_DirX << ",  y : " << m_DirY << endl;
 }
 
 void Ball::Late_Update(float dt)
 {
+
 }
 
 void Ball::Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix)
@@ -348,8 +371,8 @@ void Ball::Fire()
 		}
 
 		// 3. 고정 속도 곱하기
-		m_DirX *= m_Speed;
-		m_DirY *= m_Speed;
+	/*	m_DirX *= m_Speed;
+		m_DirY *= m_Speed;*/
 	}
 }
 
@@ -390,7 +413,7 @@ void Ball::Bounce_Off_Bar(float barVelocityX)
 
 	// 2. 바의 이동 속도(스핀) 반영
 	// 속도값이 너무 크면 각도가 휙휙 꺾이므로 마찰(friction) 비율을 곱해줍니다.
-	float frictionWeight = 0.05f;
+	float frictionWeight = 0.0001f;
 	m_DirX += (barVelocityX * frictionWeight);
 
 	// 3. 대망의 방향 벡터 정규화 (Normalize) - 피타고라스의 정리
@@ -409,7 +432,7 @@ void Ball::Bounce_Off_Bar(float barVelocityX)
 		m_DirY /= length;
 	}
 
-	// 4. 고정 속도(m_Speed) 곱하기
-	m_DirX *= m_Speed;
-	m_DirY *= m_Speed;
+	//// 4. 고정 속도(m_Speed) 곱하기
+	//m_DirX *= m_Speed;
+	//m_DirY *= m_Speed;
 }

@@ -84,6 +84,13 @@ void MyGame::Create_MyWindow(HINSTANCE hInstance) {
 }
 
 void MyGame::Update(float dt) {
+    if(g_RawInput->Key_Down(VK_ESCAPE)) {
+        PostQuitMessage(0);
+	}
+    if(g_RawInput->Key_Down('R')) {
+        m_HW4_3->Initialize(); // R키를 누르면 게임 초기화
+	}
+
     m_HW4_3->Update(dt);
 }
 
@@ -117,9 +124,11 @@ LRESULT CALLBACK MyGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
         g_WinInfo.WinCY = HIWORD(lParam);
         MyGame::Get_Instance()->Create_BackBuffer();
 
-        g_RawInput->Update_InputDev(lParam);
-
         break;
+
+    case WM_INPUT:
+        g_RawInput->Update_InputDev(lParam);
+		break;
 
     case WM_DESTROY:
         PostQuitMessage(0);
