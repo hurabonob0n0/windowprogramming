@@ -28,7 +28,6 @@ private:
 
 private:
     GameObject* m_Camera;
-    HW4_3* m_HW4_3;
     RenderManager* m_RM = nullptr;
 
 public:

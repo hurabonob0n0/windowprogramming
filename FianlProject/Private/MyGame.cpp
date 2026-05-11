@@ -52,8 +52,7 @@ bool MyGame::Initialize() {
     m_Camera->Get_Component<Transform>()->Set_Position(800, 450);
 
     //=======================HW4_3========================
-    m_HW4_3 = new HW4_3();
-    m_HW4_3->Initialize();
+
 
     return true;
 }
@@ -87,16 +86,11 @@ void MyGame::Update(float dt) {
     if(g_RawInput->Key_Down(VK_ESCAPE)) {
         PostQuitMessage(0);
 	}
-    if(g_RawInput->Key_Down('R')) {
-        m_HW4_3->Initialize(); // R키를 누르면 게임 초기화
-	}
-
-    m_HW4_3->Update(dt);
+  
 }
 
 void MyGame::Late_Update(float dt) {
 
-    m_HW4_3->Late_Update(dt);
     m_Camera->Late_Update(dt);
 }
 
@@ -107,8 +101,7 @@ void MyGame::Draw() {
     RECT rect = { 0, 0, g_WinInfo.WinCX, g_WinInfo.WinCY };
     FillRect(m_hMemDC, &rect, (HBRUSH)GetStockObject(LTGRAY_BRUSH));
 
-    //2. 여기에 그립니다.
-    m_HW4_3->Draw(m_hMemDC, m_RM->Get_ViewMatrix(), m_RM->Get_ProjMatrix());
+
 
     // 3. 완성된 [가짜 도화지]를 [실제 화면]으로 순식간에 복사합니다. (BitBlt)
     HDC hDC = GetDC(g_WinInfo.hWnd);

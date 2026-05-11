@@ -52,6 +52,9 @@
     <Filter Include="02.GameObject\03.과제\4-3">
       <UniqueIdentifier>{7cdf89c0-5d9f-4475-b15b-01b5c6088c6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Component\Sprite">
+      <UniqueIdentifier>{0edaaae6-fd6b-43c0-ada7-18a892494a21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Utils.hpp">
@@ -99,6 +102,9 @@
     <ClInclude Include="..\Public\HW4_3.h">
       <Filter>02.GameObject\03.과제\4-3</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Sprite.h">
+      <Filter>01.Component\Sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Component.cpp">
@@ -136,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\HW4_3.cpp">
       <Filter>02.GameObject\03.과제\4-3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Sprite.cpp">
+      <Filter>01.Component\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

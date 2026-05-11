@@ -146,6 +146,7 @@
     <ClInclude Include="..\Public\RawInput.hpp" />
     <ClInclude Include="..\Public\RenderManager.h" />
     <ClInclude Include="..\Public\shape.h" />
+    <ClInclude Include="..\Public\Sprite.h" />
     <ClInclude Include="..\Public\Timer.h" />
     <ClInclude Include="..\Public\Transform.h" />
     <ClInclude Include="..\Public\Utils.hpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="..\Private\main.cpp" />
     <ClCompile Include="..\Private\MyGame.cpp" />
     <ClCompile Include="..\Private\shape.cpp" />
+    <ClCompile Include="..\Private\Sprite.cpp" />
     <ClCompile Include="..\Private\Timer.cpp" />
     <ClCompile Include="..\Private\Transform.cpp" />
   </ItemGroup>
