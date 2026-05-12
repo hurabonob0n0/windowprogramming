@@ -131,7 +131,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Public\BaseSpriteObject.h" />
+    <ClInclude Include="..\Public\BaseSpriteObject.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\Public\BaseObject.h" />
     <ClInclude Include="..\Public\Camera.h" />
     <ClInclude Include="..\Public\Component.h" />
@@ -152,7 +154,9 @@
     <ClInclude Include="..\Public\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Private\BaseSpriteObject.cpp" />
+    <ClCompile Include="..\Private\BaseSpriteObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\Private\BaseObject.cpp" />
     <ClCompile Include="..\Private\Camera.cpp" />
     <ClCompile Include="..\Private\Component.cpp" />

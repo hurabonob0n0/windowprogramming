@@ -14,5 +14,6 @@ public:
 	void Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix) override;
 
 private:
+	class VertexBuffer* m_VB = nullptr;
 	class Sprite* m_Sprite = nullptr;
 };

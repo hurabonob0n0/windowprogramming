@@ -1,13 +1,18 @@
 #include "BaseSpriteObject.h"
 #include "RawInput.hpp"
+#include "VertexBuffer.h"
 
 GameObject* BaseSpriteObject::Initialize()
 {
 	m_Sprite = Add_Component<Sprite>();
-	m_Sprite->Load_Image("../Sprites/miho1.jpg");
+	m_Sprite->Load_Image(L"../Sprites/miho1.png");
 	
 
-	m_Transform->Set_TransformState(0, 0, 22.5, 22.5, 0);
+	m_VB = Add_Component<VertexBuffer>();
+	m_VB->Set_Shape(QUAD);
+
+
+	m_Transform->Set_TransformState(0, 0, 100, 100, 0);
 	//m_Transform->set
 	return this;
 }
@@ -31,5 +36,6 @@ void BaseSpriteObject::Late_Update(float dt)
 
 void BaseSpriteObject::Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix)
 {
-	m_Sprite->Draw(hDC, viewMatrix, projMatrix);
+	m_VB->Make_Points(m_Transform->Get_WorldMatrix(), viewMatrix, projMatrix);
+	m_Sprite->Draw(hDC,m_VB->Get_Points());
 }

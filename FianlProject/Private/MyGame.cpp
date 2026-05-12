@@ -1,12 +1,11 @@
 #include "MyGame.h"
 #include <iostream>
-#include "Board.h"
 #include "RawInput.hpp"
 #include "BaseSpriteObject.h"
 #include "VertexBuffer.h"
 
 
-WinInfo g_WinInfo = { nullptr, 1600, 900};
+WinInfo g_WinInfo = { nullptr, 1600, 920};
 
 std::unique_ptr<MyGame> MyGame::m_Instance = nullptr;
 unique_ptr<RenderManager> RenderManager::m_Instance = nullptr;
@@ -57,6 +56,10 @@ bool MyGame::Initialize() {
     m_BaseObject = new BaseObject();
     m_BaseObject->Initialize();
 
+    //====================bo=============
+    m_GameObject = new BaseSpriteObject();
+    m_GameObject->Initialize();
+
     return true;
 }
 
@@ -90,11 +93,13 @@ void MyGame::Update(float dt) {
         PostQuitMessage(0);
 	}
     m_BaseObject->Update(dt);
+    m_GameObject->Update(dt);
 }
 
 void MyGame::Late_Update(float dt) {
 
     m_BaseObject->Late_Update(dt);
+    m_GameObject->Late_Update(dt);
     m_Camera->Late_Update(dt);
 }
 
@@ -107,6 +112,7 @@ void MyGame::Draw() {
 
     // 2. 여기에 그립니다.
     m_BaseObject->Draw(m_hMemDC, m_RM->Get_ViewMatrix(), m_RM->Get_ProjMatrix());
+    m_GameObject->Draw(m_hMemDC, m_RM->Get_ViewMatrix(), m_RM->Get_ProjMatrix());
 
     // 3. 완성된 [가짜 도화지]를 [실제 화면]으로 순식간에 복사합니다. (BitBlt)
     HDC hDC = GetDC(g_WinInfo.hWnd);
