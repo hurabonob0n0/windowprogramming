@@ -17,7 +17,7 @@ int main() {
     MyGame* myGame = MyGame::Get_Instance();
 
     Timer gameTimer;
-    float minFrameSec = 0.001f;
+    float minFrameSec = 0.016f;
     float framesec = 0;
 
     // 초기화 실패 시 종료

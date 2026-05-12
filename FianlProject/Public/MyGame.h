@@ -28,6 +28,8 @@ private:
 
 private:
     GameObject* m_Camera;
+    GameObject* m_GameObject;
+    GameObject* m_BaseObject;
     RenderManager* m_RM = nullptr;
 
 public:

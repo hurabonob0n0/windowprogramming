@@ -18,16 +18,16 @@ void Camera::Late_Update(float dt)
 		XMVECTOR pos = m_Owner->Get_State(Transform::STATE_POSITION);
 		m_Transform->Set_Position(pos.m128_f32[0], pos.m128_f32[1]);
 	}
-	else {
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-			m_Transform->Go_Right(dt*1000);
-		if (GetAsyncKeyState(VK_UP) & 0x8000)
-			m_Transform->Go_Up(dt * 1000);
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-			m_Transform->Go_Left(dt * 1000);
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-			m_Transform->Go_Down(dt * 1000);
-	}
+	//else {
+	//	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	//		m_Transform->Go_Right(dt*1000);
+	//	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	//		m_Transform->Go_Up(dt * 1000);
+	//	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	//		m_Transform->Go_Left(dt * 1000);
+	//	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	//		m_Transform->Go_Down(dt * 1000);
+	//}
 
 	m_RM->Set_ViewMatrix(m_Transform->Get_WorldMatrixInv());
 	

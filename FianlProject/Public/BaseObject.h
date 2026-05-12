@@ -14,5 +14,6 @@ public:
 	void Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix) override;
 
 private:
-	Shape* m_Shape = nullptr;
+	class VertexBuffer* m_VB = nullptr;
+	class Shape* m_Shape = nullptr;
 };

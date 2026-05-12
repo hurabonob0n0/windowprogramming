@@ -2,9 +2,11 @@
 #include <iostream>
 #include "Board.h"
 #include "RawInput.hpp"
+#include "BaseSpriteObject.h"
+#include "VertexBuffer.h"
 
 
-WinInfo g_WinInfo = { nullptr, 1600, 920};
+WinInfo g_WinInfo = { nullptr, 1600, 900};
 
 std::unique_ptr<MyGame> MyGame::m_Instance = nullptr;
 unique_ptr<RenderManager> RenderManager::m_Instance = nullptr;
@@ -40,7 +42,7 @@ bool MyGame::Initialize() {
 
     Create_BackBuffer();
 
-    Shape::Build_Geometrys();
+    VertexBuffer::Build_Geometrys();
 
 
     //=========================RM========================
@@ -51,8 +53,9 @@ bool MyGame::Initialize() {
     m_Camera->Initialize();
     m_Camera->Get_Component<Transform>()->Set_Position(800, 450);
 
-    //=======================HW4_3========================
-
+    //====================bo=============
+    m_BaseObject = new BaseObject();
+    m_BaseObject->Initialize();
 
     return true;
 }
@@ -86,11 +89,12 @@ void MyGame::Update(float dt) {
     if(g_RawInput->Key_Down(VK_ESCAPE)) {
         PostQuitMessage(0);
 	}
-  
+    m_BaseObject->Update(dt);
 }
 
 void MyGame::Late_Update(float dt) {
 
+    m_BaseObject->Late_Update(dt);
     m_Camera->Late_Update(dt);
 }
 
@@ -101,7 +105,8 @@ void MyGame::Draw() {
     RECT rect = { 0, 0, g_WinInfo.WinCX, g_WinInfo.WinCY };
     FillRect(m_hMemDC, &rect, (HBRUSH)GetStockObject(LTGRAY_BRUSH));
 
-
+    // 2. 여기에 그립니다.
+    m_BaseObject->Draw(m_hMemDC, m_RM->Get_ViewMatrix(), m_RM->Get_ProjMatrix());
 
     // 3. 완성된 [가짜 도화지]를 [실제 화면]으로 순식간에 복사합니다. (BitBlt)
     HDC hDC = GetDC(g_WinInfo.hWnd);

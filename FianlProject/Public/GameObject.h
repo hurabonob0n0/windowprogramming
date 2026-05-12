@@ -2,7 +2,7 @@
 #include "Component.h" // Transform 선언 포함
 #include "Transform.h"
 #include "shape.h"
-
+#include "Sprite.h"
 
 
 class GameObject {

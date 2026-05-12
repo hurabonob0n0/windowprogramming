@@ -34,14 +34,8 @@
     <Filter Include="02.GameObject\01.BaseObject">
       <UniqueIdentifier>{d567edb0-19c0-4fe6-819f-83af97a24722}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\02.Board">
-      <UniqueIdentifier>{ed169c49-22d0-458b-b44d-f5c39bc21d25}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\03.과제">
       <UniqueIdentifier>{f27e6d63-9da6-4d82-9dc9-412af1cd80d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\03.과제\4-2">
-      <UniqueIdentifier>{3a8a5e65-9c8c-4924-87fd-456121571891}</UniqueIdentifier>
     </Filter>
     <Filter Include="00.System\RawInput">
       <UniqueIdentifier>{11b01f12-452e-420b-b44e-7c5b5edb66d3}</UniqueIdentifier>
@@ -52,8 +46,14 @@
     <Filter Include="02.GameObject\03.과제\4-3">
       <UniqueIdentifier>{7cdf89c0-5d9f-4475-b15b-01b5c6088c6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\04.SpriteObject">
+      <UniqueIdentifier>{b14cd220-b2c2-4040-bb0f-9d3764097270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Component\VertexBuffer">
+      <UniqueIdentifier>{a21a0833-3080-46e1-85a5-96a483e1236e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="01.Component\Sprite">
-      <UniqueIdentifier>{0edaaae6-fd6b-43c0-ada7-18a892494a21}</UniqueIdentifier>
+      <UniqueIdentifier>{a861afcf-44e8-4d03-8284-33e9af76dc6a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -90,17 +90,17 @@
     <ClInclude Include="..\Public\BaseObject.h">
       <Filter>02.GameObject\01.BaseObject</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Board.h">
-      <Filter>02.GameObject\02.Board</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\HW4_2.h">
-      <Filter>02.GameObject\03.과제\4-2</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\RawInput.hpp">
       <Filter>00.System\RawInput</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\HW4_3.h">
       <Filter>02.GameObject\03.과제\4-3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BaseSpriteObject.h">
+      <Filter>02.GameObject\04.SpriteObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VertexBuffer.h">
+      <Filter>01.Component\VertexBuffer</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Sprite.h">
       <Filter>01.Component\Sprite</Filter>
@@ -134,14 +134,14 @@
     <ClCompile Include="..\Private\BaseObject.cpp">
       <Filter>02.GameObject\01.BaseObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Board.cpp">
-      <Filter>02.GameObject\02.Board</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\HW4_2.cpp">
-      <Filter>02.GameObject\03.과제\4-2</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\HW4_3.cpp">
       <Filter>02.GameObject\03.과제\4-3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BaseSpriteObject.cpp">
+      <Filter>02.GameObject\04.SpriteObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VertexBuffer.cpp">
+      <Filter>01.Component\VertexBuffer</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Sprite.cpp">
       <Filter>01.Component\Sprite</Filter>
