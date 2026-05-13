@@ -3,10 +3,8 @@
 #include <cctype>
 #include <algorithm>
 
-// 정적 멤버 정의
 std::unordered_map<std::string, CImage> Sprite::g_Sprites;
 
-// wstring 에서 string 으로 변환
 static std::string WStringToString(const std::wstring& ws) {
 	if (ws.empty()) return {};
 	int size = ::WideCharToMultiByte(CP_ACP, 0, ws.c_str(), -1, nullptr, 0, nullptr, nullptr);
@@ -30,7 +28,6 @@ void Sprite::Update(float dt) {
 }
 
 bool Sprite::Load_Image(LPCTSTR filePath) {
-	// 1. 파일명 추출 및 메타데이터 파싱을 가장 먼저 수행합니다.
 	std::wstring wpath(filePath);
 	size_t pos = wpath.find_last_of(L"\\/");
 	std::wstring fname = (pos == std::wstring::npos) ? wpath : wpath.substr(pos + 1);
@@ -60,16 +57,13 @@ bool Sprite::Load_Image(LPCTSTR filePath) {
 		m_FrameTime = 1.f;
 	}
 
-	// 2. 이미 캐시에 같은 이름의 이미지가 로드되어 있는지 확인합니다 (중복 방지).
 	if (g_Sprites.find(m_Name) == g_Sprites.end()) {
-		// 3. 캐시에 없다면 지역 변수 없이 맵의 CImage 객체에 직접 Load 합니다!
 		if (g_Sprites[m_Name].Load(filePath) == E_FAIL) {
-			g_Sprites.erase(m_Name); // 로드 실패 시 빈 객체 제거
+			g_Sprites.erase(m_Name); 
 			return false;
 		}
 	}
 
-	// 4. 로드가 완료된(또는 이미 존재하는) 안전한 참조(&)를 가져와서 설정합니다.
 	CImage& safeImg = g_Sprites[m_Name];
 
 	m_RowCnt = (m_totalFrameCnt + m_ColumnCnt - 1) / m_ColumnCnt;
@@ -112,11 +106,9 @@ void Sprite::Draw(HDC hDC, const std::vector<POINT>& Points) {
 		return;
 	}
 
-	// CImage::AlphaBlend 로 그리기 (회전 없음)
-	//CImage& img = g_Sprites[m_Name];
 	g_Sprites[m_Name].AlphaBlend(hDC,
 		static_cast<int>(minX), static_cast<int>(minY), destW, destH,
-		srcX, srcY, m_FrameWidth, m_FrameHeight, 255);
+		srcX, srcY, m_FrameWidth, m_FrameHeight, 127);
 	/*img.StretchBlt(hDC,
 		static_cast<int>(minX), static_cast<int>(minY), destW, destH,
 		srcX, srcY, m_FrameWidth, m_FrameHeight );*/

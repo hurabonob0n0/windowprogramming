@@ -50,7 +50,6 @@ bool MyGame::Initialize() {
     //=======================Camera======================
     m_Camera = new Camera();
     m_Camera->Initialize();
-    m_Camera->Get_Component<Transform>()->Set_Position(800, 450);
 
     //====================bo=============
     m_BaseObject = new BaseObject();

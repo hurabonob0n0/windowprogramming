@@ -21,15 +21,15 @@ private:
 	static std::unordered_map<std::string, CImage> g_Sprites;
 
 private:
-	int		m_totalFrameCnt = 1;
-	int		m_ColumnCnt = 1;
-	int		m_RowCnt = 1;
-	int		m_CurFrame = 0;
-	int		m_Width = 0;
-	int		m_Height = 0;
-	int		m_FrameWidth = 0;
-	int		m_FrameHeight = 0;
-	float	m_CurFrameTime = 0.f;
-	float	m_FrameTime = 1.f;
-	std::string	m_Name;
+	int				m_totalFrameCnt = 1;
+	int				m_ColumnCnt = 1;
+	int				m_RowCnt = 1;
+	int				m_CurFrame = 0;
+	int				m_Width = 0;
+	int				m_Height = 0;
+	int				m_FrameWidth = 0;
+	int				m_FrameHeight = 0;
+	float			m_CurFrameTime = 0.f;
+	float			m_FrameTime = 1.f;
+	std::string		m_Name;
 };

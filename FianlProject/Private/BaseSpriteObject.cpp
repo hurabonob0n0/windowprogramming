@@ -12,7 +12,7 @@ GameObject* BaseSpriteObject::Initialize()
 	m_VB->Set_Shape(QUAD);
 
 
-	m_Transform->Set_TransformState(0, 0, 100, 100, 0);
+	m_Transform->Set_TransformState(0, 0, 500, 500, 0);
 	//m_Transform->set
 	return this;
 }
