@@ -55,6 +55,9 @@
     <Filter Include="01.Component\Sprite">
       <UniqueIdentifier>{a861afcf-44e8-4d03-8284-33e9af76dc6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\05.Mouse">
+      <UniqueIdentifier>{61b5ca3f-3f2a-4df7-84e8-fed695a1944c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Utils.hpp">
@@ -105,6 +108,9 @@
     <ClInclude Include="..\Public\Sprite.h">
       <Filter>01.Component\Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Mouse.h">
+      <Filter>02.GameObject\05.Mouse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Component.cpp">
@@ -145,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Sprite.cpp">
       <Filter>01.Component\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Mouse.cpp">
+      <Filter>02.GameObject\05.Mouse</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
