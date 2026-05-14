@@ -17,12 +17,7 @@
 using namespace std;
 
 #include <DirectXMath.h>
-
 using namespace DirectX;
-
-#ifndef M_PI
-#define M_PI 3.14159265358979323846f
-#endif
 
 struct WinInfo {
     HWND hWnd;
@@ -30,14 +25,9 @@ struct WinInfo {
     int WinCY;
 };
 
+// static variables
 extern WinInfo g_WinInfo;
-
 class RawInput;
-
 extern unique_ptr<RawInput> g_RawInput;
-
 class MyRandom;
-
 extern MyRandom* g_Random;
-
-#define DrawInputs hDC, viewMatrix, projMatrix

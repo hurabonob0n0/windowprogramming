@@ -25,6 +25,8 @@ GameObject* Mouse::Initialize()
     m_Transform->Set_TransformState(0, 0, 16, 16, 0);
     m_Transform->Set_Position(m_AbsoluteX, m_AbsoluteY);
 
+    
+
     return this;
 }
 

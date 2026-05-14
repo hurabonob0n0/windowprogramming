@@ -41,6 +41,8 @@ bool MyGame::Initialize() {
 
     ShowCursor(false);
 
+    CenterWindowAndMouse(g_WinInfo.hWnd);
+
     g_RawInput->Initialize(g_WinInfo.hWnd);
 
     ShowWindow(g_WinInfo.hWnd, SW_SHOW);
@@ -94,6 +96,30 @@ void MyGame::Create_MyWindow(HINSTANCE hInstance) {
         CW_USEDEFAULT, CW_USEDEFAULT,
         rc.right - rc.left, rc.bottom - rc.top, // 계산된 전체 창 크기
         nullptr, nullptr, hInstance, nullptr);
+}
+
+void MyGame::CenterWindowAndMouse(HWND hwnd)
+{
+    RECT rect;
+    GetWindowRect(hwnd, &rect); // 현재 창의 크기를 가져옴
+
+    int windowWidth = rect.right - rect.left;
+    int windowHeight = rect.bottom - rect.top;
+
+    // 1. 전체 화면 해상도 가져오기
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    // 2. 중앙 좌표 계산
+    int posX = (screenWidth - windowWidth) / 2;
+    int posY = (screenHeight - windowHeight) / 2;
+
+    // 3. 윈도우 위치 이동
+    SetWindowPos(hwnd, NULL, posX, posY, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+
+    // 4. 마우스 커서를 창의 정중앙으로 이동
+    // 창의 중심점 = (시작 좌표 + 너비의 절반)
+    SetCursorPos(posX + (windowWidth / 2), posY + (windowHeight / 2));
 }
 
 void MyGame::Update(float dt) {

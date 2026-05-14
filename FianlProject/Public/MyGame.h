@@ -20,6 +20,7 @@ public:
 private:
     void Register_Window(HINSTANCE hInstance);
     void Create_MyWindow(HINSTANCE hInstance);
+    void CenterWindowAndMouse(HWND hwnd);
 
 private:
     // 윈도우 프로시저 (메시지 처리)
@@ -53,6 +54,5 @@ public:
 
     static void Destroy_Instance() {
         m_Instance.reset(); // 이때 소멸자가 즉시 호출됨
-        
     }   
 };
