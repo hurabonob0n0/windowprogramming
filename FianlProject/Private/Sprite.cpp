@@ -78,7 +78,7 @@ bool Sprite::Load_Image(LPCTSTR filePath) {
 	return true;
 }
 
-void Sprite::Draw(HDC hDC, const std::vector<POINT>& Points) {
+void Sprite::Draw(HDC hDC, const std::vector<POINT>& Points,bool isAlpha,DWORD dop ) {
 	if (g_Sprites.find(m_Name) == g_Sprites.end()) {
 		return;
 	}
@@ -105,12 +105,16 @@ void Sprite::Draw(HDC hDC, const std::vector<POINT>& Points) {
 	if (destW <= 0 || destH <= 0) {
 		return;
 	}
-
-	g_Sprites[m_Name].AlphaBlend(hDC,
-		static_cast<int>(minX), static_cast<int>(minY), destW, destH,
-		srcX, srcY, m_FrameWidth, m_FrameHeight, 127);
-	/*img.StretchBlt(hDC,
-		static_cast<int>(minX), static_cast<int>(minY), destW, destH,
-		srcX, srcY, m_FrameWidth, m_FrameHeight );*/
+	if (isAlpha) {
+		g_Sprites[m_Name].AlphaBlend(hDC,
+			static_cast<int>(minX), static_cast<int>(minY), destW, destH,
+			srcX, srcY, m_FrameWidth, m_FrameHeight, 255);
+	}
+	else {
+		g_Sprites[m_Name].StretchBlt(hDC,
+			static_cast<int>(minX), static_cast<int>(minY), destW, destH,
+			srcX, srcY, m_FrameWidth, m_FrameHeight, dop);
+	}
+	
 }
 

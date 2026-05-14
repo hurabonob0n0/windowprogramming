@@ -13,6 +13,7 @@
 #include <iostream>
 #include <math.h>
 #include <memory>
+#include <algorithm>
 using namespace std;
 
 #include <DirectXMath.h>

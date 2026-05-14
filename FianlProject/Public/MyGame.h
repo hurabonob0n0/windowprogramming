@@ -27,9 +27,12 @@ private:
     void Create_BackBuffer();
 
 private:
+    GameObject* m_Mouse;
     GameObject* m_Camera;
     GameObject* m_GameObject;
     GameObject* m_BaseObject;
+
+private: // <unique_ptr>
     RenderManager* m_RM = nullptr;
 
 public:
@@ -50,5 +53,6 @@ public:
 
     static void Destroy_Instance() {
         m_Instance.reset(); // 이때 소멸자가 즉시 호출됨
+        
     }   
 };
