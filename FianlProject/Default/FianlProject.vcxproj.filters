@@ -19,9 +19,6 @@
     <Filter Include="01.Component\Shape">
       <UniqueIdentifier>{8b79e289-9745-41fb-adcd-57906e12f011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\00.Camera">
-      <UniqueIdentifier>{8d457d80-40cb-43d7-aab5-9c6025c2cd9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.System\MyGame">
       <UniqueIdentifier>{33da0358-40ab-4522-835c-e6ba39f86141}</UniqueIdentifier>
     </Filter>
@@ -31,23 +28,11 @@
     <Filter Include="00.System\RenderManager">
       <UniqueIdentifier>{bf7c62ee-4227-4b1e-b014-32985e954ddb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01.BaseObject">
-      <UniqueIdentifier>{d567edb0-19c0-4fe6-819f-83af97a24722}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\03.과제">
-      <UniqueIdentifier>{f27e6d63-9da6-4d82-9dc9-412af1cd80d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.System\RawInput">
       <UniqueIdentifier>{11b01f12-452e-420b-b44e-7c5b5edb66d3}</UniqueIdentifier>
     </Filter>
     <Filter Include="00.System\RandomEngine">
       <UniqueIdentifier>{8b0edaa1-c75f-4bca-8d86-915e0a483e6a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\03.과제\4-3">
-      <UniqueIdentifier>{7cdf89c0-5d9f-4475-b15b-01b5c6088c6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\04.SpriteObject">
-      <UniqueIdentifier>{b14cd220-b2c2-4040-bb0f-9d3764097270}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Component\VertexBuffer">
       <UniqueIdentifier>{a21a0833-3080-46e1-85a5-96a483e1236e}</UniqueIdentifier>
@@ -55,8 +40,29 @@
     <Filter Include="01.Component\Sprite">
       <UniqueIdentifier>{a861afcf-44e8-4d03-8284-33e9af76dc6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\05.Mouse">
+    <Filter Include="02.GameObject\02.Camera">
+      <UniqueIdentifier>{8d457d80-40cb-43d7-aab5-9c6025c2cd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\03.BaseObject">
+      <UniqueIdentifier>{d567edb0-19c0-4fe6-819f-83af97a24722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\04.과제">
+      <UniqueIdentifier>{f27e6d63-9da6-4d82-9dc9-412af1cd80d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\04.과제\4-3">
+      <UniqueIdentifier>{7cdf89c0-5d9f-4475-b15b-01b5c6088c6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\05.SpriteObject">
+      <UniqueIdentifier>{b14cd220-b2c2-4040-bb0f-9d3764097270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\06.Mouse">
       <UniqueIdentifier>{61b5ca3f-3f2a-4df7-84e8-fed695a1944c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.GameOjbect">
+      <UniqueIdentifier>{afadc85f-6e3a-4aa7-a469-0eb67f0c5c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01.RenderedObject">
+      <UniqueIdentifier>{3c797b81-650e-4a41-8763-6f398195bdb8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,11 +78,8 @@
     <ClInclude Include="..\Public\shape.h">
       <Filter>01.Component\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\GameObject.h">
-      <Filter>02.GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Camera.h">
-      <Filter>02.GameObject\00.Camera</Filter>
+      <Filter>02.GameObject\02.Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\MyGame.h">
       <Filter>00.System\MyGame</Filter>
@@ -91,16 +94,16 @@
       <Filter>00.System\RenderManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\BaseObject.h">
-      <Filter>02.GameObject\01.BaseObject</Filter>
+      <Filter>02.GameObject\03.BaseObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\RawInput.hpp">
       <Filter>00.System\RawInput</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\HW4_3.h">
-      <Filter>02.GameObject\03.과제\4-3</Filter>
+      <Filter>02.GameObject\04.과제\4-3</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\BaseSpriteObject.h">
-      <Filter>02.GameObject\04.SpriteObject</Filter>
+      <Filter>02.GameObject\05.SpriteObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\VertexBuffer.h">
       <Filter>01.Component\VertexBuffer</Filter>
@@ -109,7 +112,13 @@
       <Filter>01.Component\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Mouse.h">
-      <Filter>02.GameObject\05.Mouse</Filter>
+      <Filter>02.GameObject\06.Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GameObject.h">
+      <Filter>02.GameObject\00.GameOjbect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RenderObject.h">
+      <Filter>02.GameObject\01.RenderedObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -122,14 +131,11 @@
     <ClCompile Include="..\Private\shape.cpp">
       <Filter>01.Component\Shape</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\GameObject.cpp">
-      <Filter>02.GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\main.cpp">
       <Filter>00.System</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Camera.cpp">
-      <Filter>02.GameObject\00.Camera</Filter>
+      <Filter>02.GameObject\02.Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\MyGame.cpp">
       <Filter>00.System\MyGame</Filter>
@@ -138,13 +144,13 @@
       <Filter>00.System\Timer</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\BaseObject.cpp">
-      <Filter>02.GameObject\01.BaseObject</Filter>
+      <Filter>02.GameObject\03.BaseObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\HW4_3.cpp">
-      <Filter>02.GameObject\03.과제\4-3</Filter>
+      <Filter>02.GameObject\04.과제\4-3</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\BaseSpriteObject.cpp">
-      <Filter>02.GameObject\04.SpriteObject</Filter>
+      <Filter>02.GameObject\05.SpriteObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\VertexBuffer.cpp">
       <Filter>01.Component\VertexBuffer</Filter>
@@ -153,7 +159,13 @@
       <Filter>01.Component\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Mouse.cpp">
-      <Filter>02.GameObject\05.Mouse</Filter>
+      <Filter>02.GameObject\06.Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GameObject.cpp">
+      <Filter>02.GameObject\00.GameOjbect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RenderObject.cpp">
+      <Filter>02.GameObject\01.RenderedObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

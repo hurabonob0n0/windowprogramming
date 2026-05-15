@@ -20,6 +20,9 @@ public:
     virtual void Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix) = 0;
 
 public:
+	bool Is_Dead() const { return m_IsDead; }
+
+public:
     Transform* Get_Transform() const { return m_Transform; }
     template <typename T>
     T* Add_Component() {
@@ -38,4 +41,5 @@ public:
 protected:
     std::vector<std::unique_ptr<Component>> m_Components;
     Transform* m_Transform{ nullptr }; // 빠른 접근을 위한 캐싱 포인터
+	bool m_IsDead{ false }; // 객체가 제거되어야 하는지 여부
 };

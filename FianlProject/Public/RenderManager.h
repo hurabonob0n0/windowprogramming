@@ -1,7 +1,7 @@
 // RenderManager.h
 #pragma once
 #include "Utils.hpp"
-#include "GameObject.h"
+#include "RenderObject.h"
 
 class RenderManager {
 public:
@@ -31,20 +31,20 @@ public:
     void Set_ViewMatrix(DirectX::FXMMATRIX view) { m_ViewMatrix = view; }
     void Set_ProjMatrix(DirectX::CXMMATRIX proj) { m_ProjMatrix = proj; }
 
-    //// 이번 프레임에 그려질 객체를 등록합니다.
-    //void Add_RenderObject(GameObject* obj) { m_RenderObjects.push_back(obj); }
+    // 이번 프레임에 그려질 객체를 등록합니다.
+    void Add_RenderObject(RenderObject* obj,eLayerType layerType) {
+		m_RenderObjects[(UINT)layerType].push_back(obj);
+    }
 
-    //// 렌더링이 끝나면 리스트를 비워줍니다.
-    //void Clear_RenderObjects() { m_RenderObjects.clear(); }
-
-    //// 등록된 모든 객체에게 View, Proj 행렬을 넘기며 Draw를 호출합니다.
-    //void Render_All(HDC hDC) {
-    //    for (auto& obj : m_RenderObjects) {
-    //        if (obj) {
-    //            obj->Draw(hDC, m_ViewMatrix, m_ProjMatrix);
-    //        }
-    //    }
-    //}
+    // 등록된 모든 객체에게 View, Proj 행렬을 넘기며 Draw를 호출합니다.
+    void Render_All(HDC hDC) {
+        for (int i = 0; i < (int)eLayerType::End; ++i) {
+            for (auto& obj : m_RenderObjects[i]) {
+                obj->Draw(hDC, m_ViewMatrix, m_ProjMatrix);
+            }
+            m_RenderObjects[i].clear(); // 그린 후 비우기
+        }
+    }
 
 public:
     XMMATRIX Get_ViewMatrix()const { return m_ViewMatrix; }
@@ -55,5 +55,5 @@ public:
 private:
     DirectX::XMMATRIX m_ViewMatrix;
     DirectX::XMMATRIX m_ProjMatrix;
-    //std::list<GameObject*> m_RenderObjects;
+    std::list<RenderObject*> m_RenderObjects[(UINT)eLayerType::End];
 };

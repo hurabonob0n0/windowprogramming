@@ -31,3 +31,12 @@ class RawInput;
 extern unique_ptr<RawInput> g_RawInput;
 class MyRandom;
 extern MyRandom* g_Random;
+
+enum class eLayerType {
+    Background,
+    Default,
+    Player,
+    Monster,
+    UI,
+    End // 레이어 총 개수 확인용
+};
