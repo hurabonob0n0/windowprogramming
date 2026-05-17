@@ -64,6 +64,15 @@
     <Filter Include="02.GameObject\01.RenderedObject">
       <UniqueIdentifier>{3c797b81-650e-4a41-8763-6f398195bdb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.ObjectManager">
+      <UniqueIdentifier>{1c82d3b2-e8d2-463e-89e1-92b8c6ba3112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.SceneManager">
+      <UniqueIdentifier>{b5a3fbcc-c135-4063-ad0f-393deb65dd7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\04.과제\5-1">
+      <UniqueIdentifier>{6f32033a-2da5-49cc-87c1-03a3f4f3d2ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Utils.hpp">
@@ -117,8 +126,17 @@
     <ClInclude Include="..\Public\GameObject.h">
       <Filter>02.GameObject\00.GameOjbect</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\ObjectManager.h">
+      <Filter>03.ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SceneManager.h">
+      <Filter>04.SceneManager</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\RenderObject.h">
       <Filter>02.GameObject\01.RenderedObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\HW5_1.h">
+      <Filter>02.GameObject\04.과제\5-1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +184,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\RenderObject.cpp">
       <Filter>02.GameObject\01.RenderedObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SceneManager.cpp">
+      <Filter>04.SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\HW5_1.cpp">
+      <Filter>02.GameObject\04.과제\5-1</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

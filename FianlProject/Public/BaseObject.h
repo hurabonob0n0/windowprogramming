@@ -1,10 +1,10 @@
 #pragma once
-#include "GameObject.h"
+#include "RenderObject.h"
 
-class BaseObject : public GameObject
+class BaseObject : public RenderObject
 {
 public:
-	BaseObject() : GameObject() {}
+	BaseObject() : RenderObject() {}
 	~BaseObject() = default;
 
 public:

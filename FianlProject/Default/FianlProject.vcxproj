@@ -145,15 +145,18 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\Public\HW5_1.h" />
     <ClInclude Include="..\Public\Mouse.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\Public\MyGame.h" />
+    <ClInclude Include="..\Public\ObjectManager.h" />
     <ClInclude Include="..\Public\Random_Engine.hpp" />
     <ClInclude Include="..\Public\RawInput.hpp" />
     <ClInclude Include="..\Public\RenderManager.h" />
     <ClInclude Include="..\Public\RenderObject.h" />
+    <ClInclude Include="..\Public\SceneManager.h" />
     <ClInclude Include="..\Public\shape.h" />
     <ClInclude Include="..\Public\Sprite.h" />
     <ClInclude Include="..\Public\Timer.h" />
@@ -173,6 +176,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\Private\HW5_1.cpp" />
     <ClCompile Include="..\Private\main.cpp" />
     <ClCompile Include="..\Private\Mouse.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -180,6 +184,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\MyGame.cpp" />
     <ClCompile Include="..\Private\RenderObject.cpp" />
+    <ClCompile Include="..\Private\SceneManager.cpp" />
     <ClCompile Include="..\Private\shape.cpp" />
     <ClCompile Include="..\Private\Sprite.cpp" />
     <ClCompile Include="..\Private\Timer.cpp" />

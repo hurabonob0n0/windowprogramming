@@ -12,10 +12,6 @@ unique_ptr<RenderManager> RenderManager::m_Instance = nullptr;
 
 MyGame::MyGame() {}
 MyGame::~MyGame() {
-    delete m_Mouse;
-    delete m_Camera;
-    delete m_GameObject;
-	delete m_BaseObject;
 }
 
 float Rot = 0.f;
@@ -51,24 +47,11 @@ bool MyGame::Initialize() {
     Create_BackBuffer();
 
     VertexBuffer::Build_Geometrys();
-	//=========================Mouse======================
-	m_Mouse = new Mouse();
-	m_Mouse->Initialize();
 
-    //=========================RM========================
     m_RM = RenderManager::Get_Instance();
 
-    //=======================Camera======================
-    m_Camera = new Camera();
-    m_Camera->Initialize();
-
-    //====================bo=============
-    m_BaseObject = new BaseObject();
-    m_BaseObject->Initialize();
-
-    //====================bo=============
-    m_GameObject = new BaseSpriteObject();
-    m_GameObject->Initialize();
+    m_SceneManager = SceneManager::Get_Instance();
+    m_SceneManager->Change_Scene<Basic_Scene>();
 
     return true;
 }
@@ -126,16 +109,11 @@ void MyGame::Update(float dt) {
     if(g_RawInput->Key_Down(VK_ESCAPE)) {
         PostQuitMessage(0);
 	}
-	m_Mouse->Update(dt);
-    m_BaseObject->Update(dt);
-    m_GameObject->Update(dt);
+    m_SceneManager->Update(dt);
 }
 
 void MyGame::Late_Update(float dt) {
-	m_Mouse->Late_Update(dt);
-    m_BaseObject->Late_Update(dt);
-    m_GameObject->Late_Update(dt);
-    m_Camera->Late_Update(dt);
+    m_SceneManager->Late_Update(dt);
 }
 
 void MyGame::Draw() {
@@ -146,11 +124,7 @@ void MyGame::Draw() {
     FillRect(m_hMemDC, &rect, (HBRUSH)GetStockObject(LTGRAY_BRUSH));
 
     // 2. 여기에 그립니다.
-	FXMMATRIX view = m_RM->Get_ViewMatrix();
-	CXMMATRIX proj = m_RM->Get_ProjMatrix();
-    m_BaseObject->Draw(m_hMemDC, view,proj);
-    m_GameObject->Draw(m_hMemDC, view, proj);
-	m_Mouse->Draw(m_hMemDC,  view,proj);
+    m_RM->Render_All(m_hMemDC);
 
     // 3. 완성된 [가짜 도화지]를 [실제 화면]으로 순식간에 복사합니다. (BitBlt)
     HDC hDC = GetDC(g_WinInfo.hWnd);

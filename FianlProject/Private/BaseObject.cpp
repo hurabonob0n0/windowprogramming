@@ -4,6 +4,8 @@
 
 GameObject* BaseObject::Initialize()
 {
+	__super::Initialize();
+
 	m_VB = Add_Component<VertexBuffer>();
 	m_VB->Set_Shape(QUAD);
 
@@ -28,6 +30,7 @@ void BaseObject::Update(float dt)
 
 void BaseObject::Late_Update(float dt)
 {
+	__super::Late_Update(dt);
 }
 
 void BaseObject::Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix)

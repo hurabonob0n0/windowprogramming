@@ -17,5 +17,5 @@ public:
 
 private:
 	eLayerType m_LayerType{ eLayerType::End };
-	class RenderManager* m_RenderMgr;
-}
+	class RenderManager* m_RenderMgr = nullptr;
+};

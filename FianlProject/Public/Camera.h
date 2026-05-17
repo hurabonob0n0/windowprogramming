@@ -15,6 +15,9 @@ public:
 	void Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix) override;
 
 public:
+	void Go_Right(float dX) { m_Transform->Go_Right(dX); }
+
+public:
 	Camera* Set_Owner(Transform* owner) { m_Owner = owner; return this; }
 	Camera* Set_RenderManager(RenderManager* RM) { m_RM = RM; }
 

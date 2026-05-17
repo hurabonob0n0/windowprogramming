@@ -1,10 +1,8 @@
 #pragma once
 #include "Utils.hpp"
-#include "GameObject.h"
+#include "SceneManager.h"
 #include "RenderManager.h"
-#include "Camera.h"
-#include "BaseObject.h"
-#include "HW4_3.h"
+
 
 class MyGame {
 public:
@@ -27,14 +25,9 @@ private:
     static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
     void Create_BackBuffer();
 
-private:
-    GameObject* m_Mouse;
-    GameObject* m_Camera;
-    GameObject* m_GameObject;
-    GameObject* m_BaseObject;
-
 private: // <unique_ptr>
     RenderManager* m_RM = nullptr;
+    SceneManager* m_SceneManager = nullptr;
 
 public:
     HDC     m_hMemDC{ nullptr };     // 가짜 도화지 (메모리 DC)

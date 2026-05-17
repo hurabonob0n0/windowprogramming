@@ -13,7 +13,9 @@ public:
 public:
 	void Update(float dt);
 	void Draw(HDC hDC, const std::vector<POINT>& Points, bool isAlpha = true, DWORD dop = SRCCOPY); //SRCCOPY BLACKNESS DSTINVERT MERGECOPY MERGEPAINT NOTSRCCOPY SRCPAINT SRCAND WHITENESS
-
+	void Draw(HDC hDC, const std::vector<POINT>& Points, 
+		float X_scale_ratio, float Y_scale_ratio, float Xpos, float Ypos, bool isAlpha = true, DWORD dop = SRCCOPY);
+	
 public:
 	bool Load_Image(LPCTSTR filePath);
 

@@ -4,8 +4,10 @@
 
 GameObject* BaseSpriteObject::Initialize()
 {
+	__super::Initialize();
+
 	m_Sprite = Add_Component<Sprite>();
-	m_Sprite->Load_Image(L"../Sprites/miho1.png");
+	m_Sprite->Load_Image(L"../Sprites/miho2.png");
 	
 
 	m_VB = Add_Component<VertexBuffer>();
@@ -20,18 +22,18 @@ GameObject* BaseSpriteObject::Initialize()
 void BaseSpriteObject::Update(float dt)
 {
 	if (g_RawInput->Key_Pressing('W'))
-		m_Transform->Go_Up(100 * dt);
+		m_Transform->Go_Up(1000 * dt);
 	if (g_RawInput->Key_Pressing('A'))
-		m_Transform->Go_Left(100 * dt);
+		m_Transform->Go_Left(1000 * dt);
 	if (g_RawInput->Key_Pressing('S'))
-		m_Transform->Go_Down(100 * dt);
+		m_Transform->Go_Down(1000 * dt);
 	if (g_RawInput->Key_Pressing('D'))
-		m_Transform->Go_Right(100 * dt);
+		m_Transform->Go_Right(1000 * dt);
 }
 
 void BaseSpriteObject::Late_Update(float dt)
 {
-
+	__super::Late_Update(dt);
 }
 
 void BaseSpriteObject::Draw(HDC hDC, DirectX::FXMMATRIX viewMatrix, DirectX::CXMMATRIX projMatrix)

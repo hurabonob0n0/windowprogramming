@@ -118,3 +118,45 @@ void Sprite::Draw(HDC hDC, const std::vector<POINT>& Points,bool isAlpha,DWORD d
 	
 }
 
+void Sprite::Draw(HDC hDC, const std::vector<POINT>& Points, float X_scale_ratio, float Y_scale_ratio, float Xpos, float Ypos, bool isAlpha, DWORD dop)
+{
+	if (g_Sprites.find(m_Name) == g_Sprites.end()) {
+		return;
+	}
+	if (Points.size() < 4) {
+		return;
+	}
+
+	// 현재 프레임의 소스 좌표 계산
+	int srcX = m_Width * Xpos;
+	int srcY = m_Height * Ypos;
+	int FrameWidth = m_Width * X_scale_ratio;
+	int FrameHeight = m_Height * Y_scale_ratio;
+
+	// 대상 영역의 바운딩 박스 계산
+	long minX = Points[0].x, maxX = Points[0].x;
+	long minY = Points[0].y, maxY = Points[0].y;
+	for (const auto& p : Points) {
+		minX = min(minX, p.x);
+		maxX = max(maxX, p.x);
+		minY = min(minY, p.y);
+		maxY = max(maxY, p.y);
+	}
+
+	int destW = static_cast<int>(maxX - minX);
+	int destH = static_cast<int>(maxY - minY);
+	if (destW <= 0 || destH <= 0) {
+		return;
+	}
+	if (isAlpha) {
+		g_Sprites[m_Name].AlphaBlend(hDC,
+			static_cast<int>(minX), static_cast<int>(minY), destW, destH,
+			srcX, srcY, FrameWidth, FrameHeight, 255);
+	}
+	else {
+		g_Sprites[m_Name].StretchBlt(hDC,
+			static_cast<int>(minX), static_cast<int>(minY), destW, destH,
+			srcX, srcY, FrameWidth, FrameHeight, dop);
+	}
+}
+

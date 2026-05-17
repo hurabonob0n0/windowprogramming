@@ -35,8 +35,9 @@ extern MyRandom* g_Random;
 enum class eLayerType {
     Background,
     Default,
-    Player,
     Monster,
+    Player,
     UI,
-    End // 레이어 총 개수 확인용
+    Mouse,
+    End
 };

@@ -30,6 +30,17 @@ public:
 public:
     //Setters
     void Set_WorldMatrix(const XMMATRIX& mat) { XMStoreFloat4x4(&m_WorldMatrix, mat); }
+    void Set_Scale(float x, float y, float z = 1.f) {
+        // 1. 현재 방향 벡터들을 가져와서 크기를 1로 정규화(Normalize)합니다.
+        XMVECTOR vRight = XMVector3Normalize(Get_State(STATE_RIGHT));
+        XMVECTOR vUp = XMVector3Normalize(Get_State(STATE_UP));
+        XMVECTOR vLook = XMVector3Normalize(Get_State(STATE_LOOK));
+
+        // 2. 정규화된 방향 벡터에 새로운 스케일(길이)을 곱해줍니다.
+        Set_State(STATE_RIGHT, vRight * x);
+        Set_State(STATE_UP, vUp * y);
+        Set_State(STATE_LOOK, vLook * z);
+    }
     void Set_TransformState(float x, float y, float width, float height, float rotDegree) {
         XMMATRIX matScale = XMMatrixScaling(width, height, 1.0f);
         XMMATRIX matRot = XMMatrixRotationZ(XMConvertToRadians(rotDegree));
