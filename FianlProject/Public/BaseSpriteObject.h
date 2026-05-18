@@ -16,4 +16,6 @@ public:
 private:
 	class VertexBuffer* m_VB = nullptr;
 	class Sprite* m_Sprite = nullptr;
+	class Sprite* m_Sprite2 = nullptr;
+	class Shape* m_Shape = nullptr;
 };

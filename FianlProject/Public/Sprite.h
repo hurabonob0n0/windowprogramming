@@ -19,6 +19,10 @@ public:
 public:
 	bool Load_Image(LPCTSTR filePath);
 
+public:
+	int Get_FrameWidth() { return m_FrameWidth; }
+	int Get_FrameHeight() { return m_FrameHeight; }
+
 private:
 	static std::unordered_map<std::string, CImage> g_Sprites;
 
