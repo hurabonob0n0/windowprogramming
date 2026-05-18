@@ -20,8 +20,8 @@ void Basic_Scene::Initialize()
 	Miho->Initialize()->Set_Name("Miho");
 	m_ObjMgr.Add_Object(std::move(Miho));
 
-	/*unique_ptr<GameObject> Miho = make_unique<HW5_1>();
-	Miho->Initialize()->Set_Name("Miho");
-	m_ObjMgr.Add_Object(std::move(Miho));*/
+	//unique_ptr<GameObject> Miho = make_unique<HW5_1>();
+	//Miho->Initialize()->Set_Name("Miho");
+	//m_ObjMgr.Add_Object(std::move(Miho));
 
 }
