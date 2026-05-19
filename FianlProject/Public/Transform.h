@@ -93,6 +93,23 @@ public:
     void Go_Down(float SpeedXTimeDelta) {
         m_WorldMatrix._42 -= SpeedXTimeDelta;
     }
+    void Go_Dir(float radian, float SpeedxTD) {
+        float Xdir = cos(radian);
+        float Ydir = sin(radian);
+        m_WorldMatrix._41 += Xdir * SpeedxTD;
+        m_WorldMatrix._42 += Ydir * SpeedxTD;
+    }
+    void Go_to_Pos(float Xpos, float Ypos, float SpeedxTD) {
+        float Xdelta = Xpos - m_WorldMatrix._41;
+        float Ydelta = Ypos - m_WorldMatrix._42;
+
+        XMVECTOR direction = XMVectorSet(Xdelta, Ydelta, 0.0f, 0.0f);
+        XMVECTOR normalizedDir = XMVector2Normalize(direction);
+        XMVECTOR velocity = XMVectorScale(normalizedDir, SpeedxTD);
+
+        m_WorldMatrix._41 += XMVectorGetX(velocity);
+        m_WorldMatrix._42 += XMVectorGetY(velocity);
+    }
 
 private:
     XMFLOAT4X4 m_WorldMatrix;

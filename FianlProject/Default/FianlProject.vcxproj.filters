@@ -73,6 +73,9 @@
     <Filter Include="02.GameObject\04.과제\5-1">
       <UniqueIdentifier>{6f32033a-2da5-49cc-87c1-03a3f4f3d2ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\04.과제\5-5">
+      <UniqueIdentifier>{318af8cf-903e-4877-b98f-b98dcc8dd3d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Utils.hpp">
@@ -138,6 +141,9 @@
     <ClInclude Include="..\Public\HW5_1.h">
       <Filter>02.GameObject\04.과제\5-1</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\HW5_5.h">
+      <Filter>02.GameObject\04.과제\5-5</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Component.cpp">
@@ -190,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\HW5_1.cpp">
       <Filter>02.GameObject\04.과제\5-1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\HW5_5.cpp">
+      <Filter>02.GameObject\04.과제\5-5</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

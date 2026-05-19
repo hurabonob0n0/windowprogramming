@@ -20,13 +20,13 @@ void VertexBuffer::Build_Geometrys() {
         case CIRCLE: sides = 32; break;
         }
         if (sides == 4) {
-            XMFLOAT3 localpos{ 0.5f,0.5 - 0.25,0.f };
+            XMFLOAT3 localpos{ 0.5f,0.5,0.f };
             m_LocalPoints[QUAD].push_back(localpos);
-            localpos = { -0.5,0.5 - 0.25,0.f };
+            localpos = { -0.5,0.5 ,0.f };
             m_LocalPoints[QUAD].push_back(localpos);
-            localpos = { -0.5,-0.5 - 0.25,0.f };
+            localpos = { -0.5,-0.5,0.f };
             m_LocalPoints[QUAD].push_back(localpos);
-            localpos = { 0.5,-0.5 - 0.25,0.f };
+            localpos = { 0.5,-0.5 ,0.f };
             m_LocalPoints[QUAD].push_back(localpos);
             continue;
         }

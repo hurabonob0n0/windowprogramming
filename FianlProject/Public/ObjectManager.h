@@ -14,6 +14,7 @@
 #include "BaseSpriteObject.h"
 #include "Mouse.h"
 #include "HW5_1.h"
+#include "HW5_5.h"
 
 // ObjectManager.h
 class ObjectManager {
