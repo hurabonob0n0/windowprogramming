@@ -1,4 +1,5 @@
 #include "SceneManager.h"
+#include "RawInput.hpp"
 
 unique_ptr<SceneManager> SceneManager::m_Instance = nullptr;
 
@@ -20,12 +21,16 @@ void Basic_Scene::Initialize()
 	Miho->Initialize()->Set_Name("Miho");
 	m_ObjMgr.Add_Object(std::move(Miho));*/
 
-	unique_ptr<GameObject> Miho = make_unique<Cat>();
+	/*unique_ptr<GameObject> Miho = make_unique<HW5_5>();
 	Miho->Initialize()->Set_Name("Miho");
-	m_ObjMgr.Add_Object(std::move(Miho));
+	m_ObjMgr.Add_Object(std::move(Miho));*/
 
 	/*unique_ptr<GameObject> Miho = make_unique<HW5_1>();
 	Miho->Initialize()->Set_Name("Miho");
 	m_ObjMgr.Add_Object(std::move(Miho));*/
 
+
+	unique_ptr<GameObject> Miho = make_unique<HW5_7>();
+	Miho->Initialize()->Set_Name("Miho");
+	m_ObjMgr.Add_Object(std::move(Miho));
 }

@@ -22,6 +22,7 @@ public:
 public:
 	int Get_FrameWidth() { return m_FrameWidth; }
 	int Get_FrameHeight() { return m_FrameHeight; }
+	int Get_currentFrame() { return m_CurFrame; }
 
 private:
 	static std::unordered_map<std::string, CImage> g_Sprites;

@@ -27,7 +27,7 @@ GameObject* Mouse::Initialize()
     m_Transform->Set_TransformState(0, 0, 100, 100, 0);
     m_Transform->Set_Position(m_AbsoluteX, m_AbsoluteY);
 
-    Set_LayerType(eLayerType::UI);
+    Set_LayerType(eLayerType::Default);
 
     m_MainCamera = (Camera*)SceneManager::Get_Instance()->Get_ActiveScene()->Get_Object("Camera0");
     m_MainCameraTransform = m_MainCamera->Get_Transform();
