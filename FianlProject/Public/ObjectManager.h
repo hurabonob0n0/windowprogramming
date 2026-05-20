@@ -16,6 +16,7 @@
 #include "HW5_1.h"
 #include "HW5_5.h"
 #include "HW5_7.h"
+#include "HW5_8.h"
 
 // ObjectManager.h
 class ObjectManager {

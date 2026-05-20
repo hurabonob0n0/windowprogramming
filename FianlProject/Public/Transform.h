@@ -16,16 +16,18 @@ public:
 
 public:
     //Getters
-    XMVECTOR Get_State(STATE eState) const {
+    XMVECTOR    Get_State(STATE eState) const {
         return XMLoadFloat4x4(&m_WorldMatrix).r[eState];
     }
-    XMFLOAT3 Get_Scaled() const {
+    XMFLOAT3    Get_Scaled() const {
         return XMFLOAT3(XMVectorGetX(XMVector3Length(Get_State(STATE_RIGHT))),
             XMVectorGetX(XMVector3Length(Get_State(STATE_UP))),
             XMVectorGetX(XMVector3Length(Get_State(STATE_LOOK))));
     }
-    XMMATRIX Get_WorldMatrix() const { return XMLoadFloat4x4(&m_WorldMatrix); }
-    XMMATRIX Get_WorldMatrixInv() const { return XMMatrixInverse(nullptr, XMLoadFloat4x4(&m_WorldMatrix)); }
+    XMMATRIX    Get_WorldMatrix() const { return XMLoadFloat4x4(&m_WorldMatrix); }
+    XMMATRIX    Get_WorldMatrixInv() const { return XMMatrixInverse(nullptr, XMLoadFloat4x4(&m_WorldMatrix)); }
+    float       Get_PosX() const { return m_WorldMatrix._41; }
+    float       Get_PosY() const { return m_WorldMatrix._42; }
 
 public:
     //Setters
@@ -60,6 +62,8 @@ public:
         m_WorldMatrix._41 = x;
         m_WorldMatrix._42 = y;
     }
+    void Set_PosX(float x) { m_WorldMatrix._41 = x; }
+    void Set_PosY(float y) { m_WorldMatrix._42 = y; }
 
 public:
     //Transform

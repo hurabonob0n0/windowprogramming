@@ -150,6 +150,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\HW5_5.h" />
     <ClInclude Include="..\Public\HW5_7.h" />
+    <ClInclude Include="..\Public\HW5_8.h" />
     <ClInclude Include="..\Public\Mouse.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -185,6 +186,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\HW5_5.cpp" />
     <ClCompile Include="..\Private\HW5_7.cpp" />
+    <ClCompile Include="..\Private\HW5_8.cpp" />
     <ClCompile Include="..\Private\main.cpp" />
     <ClCompile Include="..\Private\Mouse.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
